@@ -30,6 +30,20 @@ module.exports = {
 			model: 'User_type'
 		},
 
+		submissions: {
+			collection: 'Submission',
+			via: 'createdBy'
+		},
+
+		ratings: {
+			collection: 'Rating',
+			via: 'from'
+		},
+
+		badges: {
+			collection: 'Badge',
+			via: 'from'
+		}
 		// any instance method goes here
 	}
 
