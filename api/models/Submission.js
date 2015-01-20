@@ -18,21 +18,15 @@ module.exports = {
 			required: true
 		},
 
-		desc: {
+		description: {
 			type: 'text'
 		},
 		
 		createdBy: {
 			model: 'User',
-			required: true
 		},
-
-		createdAt: {
-			type: 'datetime',
-			required: true
-		},
-
-		champ: {
+		
+		champ_type: {
 			model: 'Champion',
 			required: true
 		},
@@ -43,7 +37,6 @@ module.exports = {
 
 		sub_type: {
 			model: 'Submission_type',
-			required: true
 		},
 		
 		ratings: {
@@ -55,11 +48,11 @@ module.exports = {
 			collection: 'Badge',
 			via: 'given_to'
 		},
-
+		
 		state: {
 			type: 'string',
 			enum: ['approved', 'pending', 'rejected'],
 			required: true
 		}
 	}
-}
+};

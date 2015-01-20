@@ -18,5 +18,4 @@ module.exports = {
 			via: 'sub_type'
 		}
 	}
-
-}
+};

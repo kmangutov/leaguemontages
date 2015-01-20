@@ -8,7 +8,7 @@ module.exports = {
 	schema: true,
 
 	attributes: {
-		role: {
+		name: {
 			type: 'string',
 			required: true
 		},
@@ -18,4 +18,4 @@ module.exports = {
 			via: 'champ_role'
 		}
 	}
-}
+};
