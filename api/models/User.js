@@ -43,6 +43,16 @@ module.exports = {
 		badges: {
 			collection: 'Badge',
 			via: 'from'
+		},
+
+		follower: {
+			collection: 'User_follower',
+			via: 'follower'
+		},
+
+		following: {
+			collection: 'User_follower',
+			via: 'following'
 		}
 		// any instance method goes here
 	}
