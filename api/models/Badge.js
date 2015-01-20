@@ -21,10 +21,6 @@ module.exports = {
 		given_to: {
 			model: 'Submission',
 			required: true
-		},
-
-		given_date: {
-			type: 'datetime'
 		}
 	}
 };

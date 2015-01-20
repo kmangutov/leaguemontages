@@ -12,8 +12,7 @@ module.exports = {
 			type: 'string',
 			required: true
 		},
-		
-		// collection of submissions that related to a champ
+
 		has: {
 			collection: 'Submission',
 			via: 'champ_type'

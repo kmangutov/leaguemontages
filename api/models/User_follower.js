@@ -9,7 +9,7 @@ module.exports = {
 
 	attributes: {
 		follower: {
-			model: 'User'
+			model: 'User',
 			required: true
 		},
 		

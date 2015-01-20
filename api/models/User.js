@@ -9,8 +9,8 @@ module.exports = {
 	schema:true,
 
 	attributes: {
-		nickname: {
-			tyep: 'string',
+		name: {
+			type: 'string',
 			unique: true,
 			required: true
 		},
