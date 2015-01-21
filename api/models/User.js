@@ -4,6 +4,7 @@
  * created by intoxicated 1/20/15
  *
  */
+var bcrypt = require('bcrypt');
 
 module.exports = {
 	schema:true,
@@ -57,4 +58,27 @@ module.exports = {
 		// any instance method goes here
 	}
 	// any model method goes here 
+	beforeCreate: function(values, next) {
+		bcrypt.genSalt(10, function(err, salt){
+			if(err) return next(err);
+
+			bcrypt.hash(values.password, salt, function(err,hash){
+				if(err) return next(err);
+
+				values.password = hash;
+				next();
+			});
+		});
+	},
+
+	validPassword: function(user, password, cb) {
+		bcrypt.compare(password, user.password, function(err, match){
+			if(err) cb(err);
+			
+			if(match)
+				cb(null, true);
+			else
+				cb(null, false);
+		})
+	}
 };
