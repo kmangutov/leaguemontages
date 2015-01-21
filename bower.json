@@ -2,10 +2,10 @@
 	"name": "leaguemontage",
 	"version": "1.0.0",
 	"dependencies": {
-		"bootstrap":"latest",
-		"animate.css":"latest",
-		"angular":"latest",
-		"angular-route":"latest",
-		"ngDialog":"latest"
+		"bootstrap":"master",
+		"animate.css":"master",
+		"angular":"master",
+		"angular-route":"master",
+		"ngDialog":"master"
 	}
 }

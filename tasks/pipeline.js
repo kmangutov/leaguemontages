@@ -15,11 +15,11 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'assets/styles/*.css',
-  'assets/libs/bootstrap/dist/css/bootstrap.css',
-  'assets/libs/animate.css/animate.css',
-  'assets/libs/ngDialog/css/ngDialog.css',
-  'assets/libs/ngDialog/css/ngDialog-theme-default.css'
+  'styles/*.css',
+  'libs/bootstrap/dist/css/bootstrap.css',
+  'libs/animate.css/animate.css',
+  'libs/ngDialog/css/ngDialog.css',
+  'libs/ngDialog/css/ngDialog-theme-default.css'
 ];
 
 
@@ -28,14 +28,14 @@ var cssFilesToInject = [
 var jsFilesToInject = [
   
   // Load sails.io before everything else
-  'assets/libs/sails.io.js',
+  'libs/sails.io.js',
 
   // Dependencies like jQuery, or Angular are brought in here
-  'assets/libs/jquery/dist/jquery.css',
-  'assets/libs/angular/angular.js',
-  'assets/libs/angular-route/angular-route.js',
-  'assets/libs/bootstrap/dist/js/bootstrap.js',
-  'assets/libs/ngDialog/js/ngDialog.js',
+  'libs/jquery/dist/jquery.css',
+  'libs/angular/angular.js',
+  'libs/angular-route/angular-route.js',
+  'libs/bootstrap/dist/js/bootstrap.js',
+  'libs/ngDialog/js/ngDialog.js',
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
 ];
