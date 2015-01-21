@@ -53,7 +53,7 @@ module.exports = {
 		following: {
 			collection: 'User_follower',
 			via: 'following'
-		}
+		},
 		// any instance method goes here
 	}
 	// any model method goes here 

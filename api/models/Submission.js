@@ -49,6 +49,11 @@ module.exports = {
 			via: 'given_to'
 		},
 		
+		view: {
+			type: 'integer',
+			defaultTo: 0
+		},
+		
 		state: {
 			type: 'string',
 			enum: ['approved', 'pending', 'rejected'],

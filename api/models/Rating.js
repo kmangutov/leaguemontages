@@ -9,17 +9,17 @@ module.exports = {
 
 	attributes: {
 		value: {
-			type: 'int',
-			required: true
-		},
-
-		given_to: {
-			model: 'Submission',
+			type: 'integer',
 			required: true
 		},
 
 		from: {
 			model: 'User',
+			required: true
+		},
+
+		given_to: {
+			model: 'Submission',
 			required: true
 		}
 	}		
