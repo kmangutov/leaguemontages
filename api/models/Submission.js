@@ -49,9 +49,26 @@ module.exports = {
 			via: 'given_to'
 		},
 		
+		//lifetime view counter
 		view: {
 			type: 'integer',
 			defaultTo: 0
+		},
+
+		//view counters
+		daily: {
+			collection: 'Daily',
+			via: 'on'
+		},
+
+		weekly: {
+			collection: 'Weekly',
+			via: 'on'
+		},
+
+		monthly: {
+			collection: 'Monthly',
+			via: 'on'
 		},
 		
 		state: {
