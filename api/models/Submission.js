@@ -70,6 +70,12 @@ module.exports = {
 			collection: 'Monthly',
 			via: 'on'
 		},
+
+		tags: {
+			collection: 'Tag',
+			via: 'has',
+			dominant: true
+		},
 		
 		state: {
 			type: 'string',
