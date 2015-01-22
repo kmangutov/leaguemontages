@@ -13,7 +13,7 @@ module.exports = {
             required: true
         },
 
-        counter: {
+        count: {
             type: 'integer',
             required: true
         },
