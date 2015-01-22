@@ -38,6 +38,11 @@ module.exports.routes = {
 
   '/kirill': {
     view: 'kirill'
+  },
+
+  'GET /getCount': {
+    controller: 'MainController',
+    action: 'getCount'
   }
   
   /***************************************************************************

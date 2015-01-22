@@ -6,7 +6,7 @@
 
 module.exports = {
 	schema: true,
-
+	connection: 'mysqlServer',
 	attributes: {
 		badge_type: {
 			model: 'Badge_type',

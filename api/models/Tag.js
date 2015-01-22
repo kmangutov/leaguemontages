@@ -5,7 +5,7 @@
 
  module.exports = {
     schema: true,
-
+    connection: 'mysqlServer',
     attributes: {
         name: {
             type: 'string',
@@ -20,7 +20,7 @@
         },
 
         has: {
-            collection: 'Submission'
+            collection: 'Submission',
             via: 'tags'
         },
 
@@ -31,6 +31,7 @@
     },
 
     beforeCreate: function(values, next) {
+
         Tag.findOne({name:values.name}).exec(function(err, tag){
             if(err)
                 next(err);

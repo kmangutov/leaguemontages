@@ -6,7 +6,7 @@
 
 module.exports = {
 	schema: true,
-
+	connection: 'mysqlServer',
 	attributes: {
 		title: {
 			type: 'string',
@@ -81,6 +81,11 @@ module.exports = {
 			type: 'string',
 			enum: ['approved', 'pending', 'rejected'],
 			required: true
+		},
+
+		incrementView:function(){
+			this.view = this.view + 1;
+			this.save();
 		}
 	}
 };

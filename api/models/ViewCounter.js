@@ -6,7 +6,7 @@
 
 module.exports = {
     schema:true,
-
+    connection: 'mysqlServer',
     attributes: {
         submission_id: {
             model: 'Submission',
