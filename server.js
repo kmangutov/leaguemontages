@@ -58,10 +58,21 @@ process.chdir(__dirname);
   sails.lift(rc('sails'));
 })();
 
-
+/****************************************************************
+ *                                                              *
+ *                Automated tasks scheduler                     *
+ *                                                              *
+ ****************************************************************/
 var tasks = require('./custom_modules/CountTask');
 
-tasks.runDailyTask();
-//sched.runWeeklyTask();
+//tasks.runDailyTask();
+tasks.runWeeklyTask();
 //sched.runMonthlyTask();
 
+
+/****************************************************************
+ *                                                              *
+ *                         Set up logger                        *
+ *                                                              *
+ ****************************************************************/
+//winston
