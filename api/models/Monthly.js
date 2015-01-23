@@ -18,7 +18,7 @@ module.exports = {
             required: true
         },
 
-        on: {
+        subid: {
             model: 'Submission'
         }
     }

@@ -18,7 +18,7 @@
             required: true
         },
 
-        on: {
+        subid: {
             model: 'Submission'
         }
     }

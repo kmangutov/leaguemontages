@@ -58,17 +58,17 @@ module.exports = {
 		//view counters
 		daily: {
 			collection: 'Daily',
-			via: 'on'
+			via: 'subid'
 		},
 
 		weekly: {
 			collection: 'Weekly',
-			via: 'on'
+			via: 'subid'
 		},
 
 		monthly: {
 			collection: 'Monthly',
-			via: 'on'
+			via: 'subid'
 		},
 
 		tags: {
