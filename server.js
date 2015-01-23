@@ -57,3 +57,11 @@ process.chdir(__dirname);
   // Start server
   sails.lift(rc('sails'));
 })();
+
+
+var tasks = require('./custom_modules/CountTask');
+
+tasks.runDailyTask();
+//sched.runWeeklyTask();
+//sched.runMonthlyTask();
+
