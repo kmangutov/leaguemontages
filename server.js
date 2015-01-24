@@ -66,7 +66,7 @@ process.chdir(__dirname);
 var tasks = require('./custom_modules/CountTask');
 
 //tasks.runDailyTask();
-tasks.runWeeklyTask();
+//tasks.runWeeklyTask();
 //sched.runMonthlyTask();
 
 

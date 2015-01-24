@@ -28,8 +28,23 @@ module.exports = {
                     var date = Date();
                     var success = true;
 
+                    //initially all submission get 0 count for the day
+                    Submission.find().exec(function(err, submissions){
+                        submissions.forEach(function(sub){
+                            Daily.create({date:date, count:0, subid:sub.id})
+                                .exec(function(err, daily){
+                                if(err) {
+                                    success = false;
+                                    console.log('Error while creating daily count for ' + subs.submission_id);
+                                    return;
+                                }
+                            });
+                        });
+                    });
+
+                    //then update submission in view
                     views.forEach(function(subs){ 
-                        Daily.create({date:Date(), count:subs.count, subid:subs.submission_id})
+                        Daily.update({date:date, subid:subs.submission_id}, {count:subs.count})
                             .exec(function(err, daily){
                             if(err) {
                                 success = false;
@@ -38,8 +53,6 @@ module.exports = {
                             }
                         });
                     });
-
-                    //what about submission that doesn't have view today??? skip or insert with count 0? 
 
                     if(success){
                         ViewCounter.query('TRUNCATE TABLE ViewCounter', function(err, empty){
@@ -71,9 +84,9 @@ module.exports = {
                 date.setTime(date.getTime() - (days * 24 * 60 * 60 * 1000));
                 date = date.toISOString().slice(0, 19).replace('T', ' ');
                 
-                var q = 'select distinct(subid), sum(count) from ' +
-                    '(select subid, count from daily where ' +
-                    'date between "' + date + '" and "' + today + '") as t group by subid';
+                var q = 'SELECT distinct(subid), sum(count) FROM ' +
+                    '(SELECT subid, count FROM daily WHERE ' +
+                    'date BETWEEN "' + date + '" and "' + today + '") as t GROUP BY subid';
 
                 console.log(q);
 
@@ -89,10 +102,12 @@ module.exports = {
                     }
 
                     //sum of count and id 
-                    Weekly.create({startDate:date, endDate:today, count: daily.count, subid:daily.subid})
-                        .exec(function(err, weekly){
-                        if(err)
-                            console.log('Cannot create weekly model');
+                    dailys.forEach(function(daily){
+                        Weekly.create({startDate:date, endDate:today, count: daily.count, subid:daily.subid})
+                            .exec(function(err, weekly){
+                            if(err)
+                                console.log('Cannot create weekly model');
+                        });
                     });
             
                 });
@@ -109,6 +124,37 @@ module.exports = {
         var job = new CronJob({
             cronTime: '00 15 02 1 * *',
             onTick: function() {
+                var today = new Date();
+                var prv = new Date();
+                prv.setMonth(today.getMonth() - 1);
+
+                //maybe its better to remove time portion 
+                today = today.toISOString().slice(0, 19).replace('T', ' ');
+                prv = prv.toISOString().slice(0, 19).replace('T', ' ');
+
+                var q = 'SELECT distinct(subid), sum(count) FROM ' +
+                    '(SELECT subid, count FROM daily WHERE ' +
+                    'date BETWEEN "' + prv + '" and "' + today + '") as t GROUP BY subid';
+
+                Daily.query(q, function(err, dailys){
+                    if(err){
+                        console.log('Database error while finding weekly data: ' + err);
+                        return;
+                    }
+
+                    if(!dailys || dailys.length == 0){
+                        console.log('Cannot find daily between ' + date + ' and ' + today);
+                        return;
+                    }
+
+                    dailys.forEach(function(daily){
+                        Monthly.create({date:today, count: daily.count, subid:daily.subid})
+                            .exec(function(err, monthly){
+                            if(err)
+                                console.log('Cannot create Monthly model on ' + today + ' for ' + daily.subid);
+                        });
+                    });
+                });
 
                 //get current date
                 //get last 4 weekly indexes
