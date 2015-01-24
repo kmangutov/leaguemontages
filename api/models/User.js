@@ -8,7 +8,7 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
 	schema:true,
-
+	connection: 'mysqlServer',
 	attributes: {
 		name: {
 			type: 'string',
@@ -56,7 +56,7 @@ module.exports = {
 			via: 'following'
 		},
 		// any instance method goes here
-	}
+	},
 	// any model method goes here 
 	beforeCreate: function(values, next) {
 		bcrypt.genSalt(10, function(err, salt){

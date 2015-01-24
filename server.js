@@ -57,3 +57,22 @@ process.chdir(__dirname);
   // Start server
   sails.lift(rc('sails'));
 })();
+
+/****************************************************************
+ *                                                              *
+ *                Automated tasks scheduler                     *
+ *                                                              *
+ ****************************************************************/
+var tasks = require('./custom_modules/CountTask');
+
+//tasks.runDailyTask();
+//tasks.runWeeklyTask();
+//sched.runMonthlyTask();
+
+
+/****************************************************************
+ *                                                              *
+ *                         Set up logger                        *
+ *                                                              *
+ ****************************************************************/
+//winston

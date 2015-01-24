@@ -6,7 +6,7 @@
 
 module.exports = {
     schema: true,
-
+    connection: 'mysqlServer',
     attributes: {
         startDate: {
             type: 'datetime',
@@ -18,12 +18,12 @@ module.exports = {
             required: true
         },
 
-        counter: {
+        count: {
             type: 'integer',
             required: true
         },
 
-        on: {
+        subid: {
             model: 'Submission'
         }
     }

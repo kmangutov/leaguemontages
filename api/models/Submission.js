@@ -6,7 +6,7 @@
 
 module.exports = {
 	schema: true,
-
+	connection: 'mysqlServer',
 	attributes: {
 		title: {
 			type: 'string',
@@ -52,23 +52,23 @@ module.exports = {
 		//lifetime view counter
 		view: {
 			type: 'integer',
-			defaultTo: 0
+			defaultsTo: 0
 		},
 
 		//view counters
 		daily: {
 			collection: 'Daily',
-			via: 'on'
+			via: 'subid'
 		},
 
 		weekly: {
 			collection: 'Weekly',
-			via: 'on'
+			via: 'subid'
 		},
 
 		monthly: {
 			collection: 'Monthly',
-			via: 'on'
+			via: 'subid'
 		},
 
 		tags: {
@@ -81,6 +81,11 @@ module.exports = {
 			type: 'string',
 			enum: ['approved', 'pending', 'rejected'],
 			required: true
+		},
+
+		incrementView:function(){
+			this.view = this.view + 1;
+			this.save();
 		}
 	}
 };
