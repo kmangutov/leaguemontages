@@ -52,7 +52,7 @@ module.exports = {
 		//lifetime view counter
 		view: {
 			type: 'integer',
-			defaultTo: 0
+			defaultsTo: 0
 		},
 
 		//view counters
