@@ -6,7 +6,6 @@
 
 module.exports = {
 	schema: true,
-    connection: 'mysqlServer',
 	attributes: {
         name: {
             type: 'string',

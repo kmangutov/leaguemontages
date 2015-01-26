@@ -26,7 +26,14 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-   '*': 'isAuthenticated',
+  //'*': 'isAuthenticated',
+  '*': true,
+  
+  SubmissionController: {
+    queryRating: true,
+    applyRating: [ 'hasJsonWebToken' ],
+  }
+
 
   /***************************************************************************
   *                                                                          *

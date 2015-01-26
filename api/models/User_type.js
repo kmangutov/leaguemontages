@@ -7,7 +7,6 @@
 
 module.exports = {
 	schema: true,
-	connection: 'mysqlServer',
 	attributes: {
 		//admin, approver, and other user level
 		utype: {
