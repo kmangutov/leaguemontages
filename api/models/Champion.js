@@ -1,7 +1,8 @@
 /**
- * Champion model 
+ * Champion 
  *
- * 
+ * @module      :: Model
+ * @description :: Describe a Champion. 
  */
 
 module.exports = {

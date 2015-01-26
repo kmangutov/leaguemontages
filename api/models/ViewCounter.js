@@ -1,9 +1,9 @@
 /**
- * View counter for daily visiter
+ * ViewCounter
  *
- *
+ * @module      :: Model
+ * @description :: Describe a view of a submission 
  */
-
 module.exports = {
     schema:true,
     attributes: {

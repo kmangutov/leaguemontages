@@ -1,7 +1,8 @@
 /**
- * Submission type 
+ * Submission type
  *
- *
+ * @module      :: Model
+ * @description :: Describe a type of submission
  */
 
 module.exports = {

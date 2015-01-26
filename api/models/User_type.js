@@ -1,9 +1,9 @@
 /**
- * User_type model 
+ * User type
  *
- *
- *
- */ 
+ * @module      :: Model
+ * @description :: Describe a type of a user
+ */
 
 module.exports = {
 	schema: true,

@@ -1,9 +1,10 @@
 /**
- * Submission model
+ * Submission
  *
- *
+ * @module      :: Model
+ * @description :: Describe a submission made by a user
  */
-
+ 
 module.exports = {
 	schema: true,
 	attributes: {

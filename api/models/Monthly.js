@@ -1,7 +1,8 @@
 /**
+ * Monthly 
  *
- *
- *
+ * @module      :: Model
+ * @description :: Describe a number of viewer for a submission on Monthly basis. 
  */
 
 module.exports = {

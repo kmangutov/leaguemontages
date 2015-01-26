@@ -1,7 +1,8 @@
 /**
- * User_follower model 
+ * User follower
  *
- *
+ * @module      :: Model
+ * @description :: Describe a follower/following relation of user
  */
 
 module.exports = {

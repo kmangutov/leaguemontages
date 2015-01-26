@@ -156,9 +156,6 @@ module.exports = {
                     });
                 });
 
-                //get current date
-                //get last 4 weekly indexes
-                //count and insert new record in monthly
             },
             start: false,
             timeZone: "America/Los_Angeles"

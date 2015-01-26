@@ -1,7 +1,8 @@
 /**
- * Rating model
+ * Rating
  *
- *
+ * @module      :: Model
+ * @description :: Prepresentation of Rating. It has attributes[from,given_to] to indicate giver/receiver
  */
 
 module.exports = {

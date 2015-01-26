@@ -1,9 +1,9 @@
 /**
- * Daily viewer counter
+ * Daily
  *
- *
+ * @module      :: Model
+ * @description :: Describe a number of viewer for a submission on daily basis.
  */
-
  module.exports = {
     schema: true,
     attributes: {

@@ -1,7 +1,8 @@
 /**
- * Badge model
+ * Badge
  *
- *
+ * @module      :: Model
+ * @description :: Describe a badge
  */
 
 module.exports = {

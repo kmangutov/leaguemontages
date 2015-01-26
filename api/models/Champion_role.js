@@ -1,7 +1,9 @@
 /**
- * Champion role model 
+ * Champion role
  *
- *
+ * @module      :: Model
+ * @description :: Describe a champion role. 
+ * @name        :: Mid, Support, jungle, ADC, Top 
  */
 
 module.exports = {

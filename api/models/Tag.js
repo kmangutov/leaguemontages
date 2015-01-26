@@ -1,8 +1,9 @@
 /**
- * Tag model for general 
+ * Tag
  *
+ * @module      :: Model
+ * @description :: Describe a general purpose tag 
  */
-
  module.exports = {
     schema: true,
     attributes: {

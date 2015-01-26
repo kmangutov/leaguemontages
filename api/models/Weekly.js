@@ -1,7 +1,8 @@
 /**
- * Weekly 
+ * Monthly 
  *
- *
+ * @module      :: Model
+ * @description :: Describe a number of viewer for a submission on Weekly basis. 
  */
 
 module.exports = {
