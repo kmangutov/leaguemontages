@@ -10,12 +10,12 @@ module.exports = {
 
   attributes: require('waterlock').models.user.attributes({
     
-	/*name: {
+	display_name: {
 		type: 'string',
 		unique: true,
 		required: true
 	},
-
+	/*
 	email: {
 		type: 'string',
 		unique: true,
