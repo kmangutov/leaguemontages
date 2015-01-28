@@ -15,17 +15,6 @@ module.exports = {
 		unique: true,
 		required: true
 	},
-	/*
-	email: {
-		type: 'string',
-		unique: true,
-		required: true
-	},
-
-	password: {
-		type: 'string',
-		required: true
-	},*/
 
 	user_type: {
 		model: 'User_type'
