@@ -34,13 +34,12 @@
 
         Tag.findOne({name:values.name}).exec(function(err, tag){
             if(err)
-                next(err);
+                return next(err);
             
-            if(!tag) //if there no tag exist
-                values.state = 'pending';
-            else // if exisit, automatically approved
-                values.state = 'approved';
+            if(tag) //if there no tag exist
+                return next('Cannot create same tag');
 
+            values.state = 'pending';
             next();
         });
     }
