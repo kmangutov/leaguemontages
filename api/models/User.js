@@ -8,45 +8,50 @@
 
 module.exports = {
 
-  attributes: require('waterlock').models.user.attributes({
+	attributes: require('waterlock').models.user.attributes({
     
-	display_name: {
-		type: 'string',
-		unique: true,
-		required: true
-	},
+		display_name: {
+			type: 'string',
+			unique: true,
+			required: true
+		},
 
-	user_type: {
-		model: 'User_type'
-	},
+		user_type: {
+			model: 'User_type'
+		},
 
-	submissions: {
-		collection: 'Submission',
-		via: 'createdBy'
-	},
+		submissions: {
+			collection: 'Submission',
+			via: 'createdBy'
+		},
 
-	ratings: {
-		collection: 'Rating',
-		via: 'from'
-	},
+		ratings: {
+			collection: 'Rating',
+			via: 'from'
+		},
 
-	badges: {
-		collection: 'Badge',
-		via: 'from'
-	},
+		badges: {
+			collection: 'Badge',
+			via: 'from'
+		},
 
-	follower: {
-		collection: 'User_follower',
-		via: 'follower'
-	},
+		follower: {
+			collection: 'User_follower',
+			via: 'follower'
+		},
 
-	following: {
-		collection: 'User_follower',
-		via: 'following'
-	},
+		following: {
+			collection: 'User_follower',
+			via: 'following'
+		},
+
+		comments: {
+			collection: 'Comment',
+			via: 'written_by'
+		}
     
-  }),
+  	}),
   
-  beforeCreate: require('waterlock').models.user.beforeCreate,
-  beforeUpdate: require('waterlock').models.user.beforeUpdate
+  	beforeCreate: require('waterlock').models.user.beforeCreate,
+  	beforeUpdate: require('waterlock').models.user.beforeUpdate
 };
