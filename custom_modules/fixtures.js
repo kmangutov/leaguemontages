@@ -6,11 +6,11 @@ function doFixture(fixture) {
         else if(!output) {
 
             //if it's not populated, insert data
-            sails.log("Running fixture: " + name);
+            sails.log("Running fixture: " + fixture.name);
             fixture.data.forEach(function(item) {
 
                 fixture.model.create(item).exec(function(e, newItem) {
-                    if(e) sails.log("Error in fixture '"+name+"': " + e);
+                    if(e) sails.log("Error in fixture '"+fixture.name+"': " + e);
                 });
             });
         }
