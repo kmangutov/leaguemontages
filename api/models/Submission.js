@@ -6,7 +6,9 @@
  */
  
 module.exports = {
+	
 	schema: true,
+	
 	attributes: {
 		title: {
 			type: 'string',
@@ -33,12 +35,12 @@ module.exports = {
 
 		champ_role: {
 			model: 'Champion_role'
-		},
+		},	
 
 		sub_type: {
 			model: 'Submission_type',
 		},
-		
+
 		ratings: {
 			collection: 'Rating',
 			via: 'given_to'
@@ -75,6 +77,11 @@ module.exports = {
 			collection: 'Tag',
 			via: 'has',
 			dominant: true
+		},
+
+		comments: {
+			collection: 'Comment',
+			via: 'written_by'
 		},
 		
 		state: {
