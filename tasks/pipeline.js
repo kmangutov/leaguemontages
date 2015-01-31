@@ -40,7 +40,9 @@ var jsFilesToInject = [
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
   'js/app.js',
-  'js/SubmitController.js'
+  'js/controllers/*.js',
+  'js/services/*.js',
+  'js/**.js'
 ];
 
 
