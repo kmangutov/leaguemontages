@@ -6,6 +6,7 @@
 		"animate.css":"master",
 		"angular":"master",
 		"angular-route":"master",
+		"angular-resource":"master",
 		"ngDialog":"master"
 	}
 }

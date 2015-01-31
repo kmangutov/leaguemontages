@@ -17,7 +17,7 @@ module.exports = {
 		},
 
 		user_type: {
-			model: 'User_type'
+			model: 'UserType'
 		},
 
 		submissions: {
@@ -36,12 +36,12 @@ module.exports = {
 		},
 
 		follower: {
-			collection: 'User_follower',
+			collection: 'UserFollower',
 			via: 'follower'
 		},
 
 		following: {
-			collection: 'User_follower',
+			collection: 'UserFollower',
 			via: 'following'
 		},
 
