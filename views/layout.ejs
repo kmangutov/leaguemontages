@@ -53,18 +53,8 @@
     <!--SCRIPTS END-->
   </head>
 
-  <body ng-app="leagueMontage" ng-controller="MainController">
-      <div class="header">
-          <% include header %>
-      </div>
-
-      <!-- ANGULAR DYNAMIC CONTENT -->
-      <div class="view_container">
-          <div ng-view></div>
-      </div>
-
-      <div class="footer">
-          <% include footer %>
-      </div>
+  <body>
+    
+     <%- body %>
   </body>
 </html>

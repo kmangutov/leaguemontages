@@ -6,10 +6,6 @@ route.config(['$routeProvider', '$locationProvider',
             templateUrl: 'views/main.html'
         })
 
-        .when('/admin', {
-            templateUrl: 'views/admin.html'
-        })
-
         .when('/login', {
             templateUrl: 'views/login.html'
         })
@@ -23,6 +19,5 @@ route.config(['$routeProvider', '$locationProvider',
             templateUrl: 'views/404.html'
         });
 
-
-    $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(true);
   }]);

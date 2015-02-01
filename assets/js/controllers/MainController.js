@@ -1,4 +1,4 @@
-var mainController = angular.module('MainController', []);
+var mainController = angular.module('MainCtrl', []);
 
 mainController.controller('MainController', function($scope, $location, $log, $window){
     $scope.tagline = "This is Main";
@@ -10,6 +10,10 @@ mainController.controller('MainController', function($scope, $location, $log, $w
     };
 
     $scope.logout = function() {
+
+    };
+
+    $scope.signup = function() {
 
     };
 
