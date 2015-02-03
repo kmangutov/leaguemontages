@@ -25,8 +25,8 @@ module.exports = {
     run: function() {
 
         fixtureBadgeType = {
-            name: "Badge_type",
-            model: Badge_type, 
+            name: "BadgeType",
+            model: BadgeType, 
             data: [ 
                 {name: "Skilled"},
                 {name: "Creative"}, 
@@ -36,8 +36,8 @@ module.exports = {
         };
 
         fixtureChampionRole = {
-            name: "Champion_role",
-            model: Champion_role,
+            name: "ChampionRole",
+            model: ChampionRole,
             data: [
                 {name: "Top"},
                 {name: "Jungle"},
@@ -48,8 +48,8 @@ module.exports = {
         };
 
         fixtureSubmissionType = {
-            name: "Submission_type",
-            model: Submission_type,
+            name: "SubmissionType",
+            model: SubmissionType,
             data: [
                 {name: "Tutorial"},
                 {name: "Montage"},
@@ -58,8 +58,8 @@ module.exports = {
         };
 
         fixtureUserType = {
-            name: "User_type",
-            model: User_type,
+            name: "UserType",
+            model: UserType,
             data: [
                 {utype: "Administrator"},
                 {utype: "Approver"},

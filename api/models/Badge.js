@@ -9,7 +9,7 @@ module.exports = {
 	schema: true,
 	attributes: {
 		badge_type: {
-			model: 'Badge_type',
+			model: 'BadgeType',
 			required: true
 		},
 
