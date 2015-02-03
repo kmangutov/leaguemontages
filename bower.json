@@ -6,7 +6,12 @@
 		"animate.css":"master",
 		"angular":"master",
 		"angular-route":"master",
+<<<<<<< HEAD
 		"ngDialog":"master",
         "ng-admin":"master"
+=======
+		"angular-resource":"master",
+		"ngDialog":"master"
+>>>>>>> master
 	}
 }

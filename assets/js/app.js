@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var adminApp = angular.module('leagueAdmin',
   ['ngRoute', 'appRoutes', 'AdminCtrl', 'ng-admin']);
 
@@ -246,3 +247,23 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
 
 var mainApp = angular.module('leagueMontage',
     ['ngRoute', 'appRoutes', 'MainController']);
+=======
+
+var app = angular.module("app", [
+  'ngRoute',
+  'appServices',
+  'appControllers',
+]);
+
+app.config(['$routeProvider', function($routeProvider) {
+
+  $routeProvider.
+    when('/submit', {
+      templateUrl: 'views/SubmitView.html',
+      controller: 'SubmitController'
+    }).
+    otherwise({
+      redirectTo: '/submit'
+    });
+}]);
+>>>>>>> master

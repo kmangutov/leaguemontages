@@ -10,7 +10,7 @@ module.exports = {
     attributes: {
         
         media_type: {
-            model: 'Media_type'
+            model: 'MediaType'
         },
 
         media_url: {

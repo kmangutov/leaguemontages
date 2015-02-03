@@ -34,11 +34,11 @@ module.exports = {
 		},
 
 		champ_role: {
-			model: 'Champion_role'
+			model: 'ChampionRole'
 		},	
 
 		sub_type: {
-			model: 'Submission_type',
+			model: 'SubmissionType',
 		},
 
 		ratings: {
