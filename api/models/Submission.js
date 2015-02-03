@@ -85,9 +85,7 @@ module.exports = {
 		},
 		
 		state: {
-			type: 'string',
-			enum: ['approved', 'pending', 'rejected'],
-			required: true
+			model: 'SubmissionState',
 		},
 
 		incrementView:function(){
