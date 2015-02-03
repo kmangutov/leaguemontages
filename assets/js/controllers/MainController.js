@@ -1,5 +1,6 @@
 var mainController = angular.module('MainCtrl', []);
 
+
 mainController.controller('MainController', function($scope, $location, $log, $window){
     $scope.tagline = "This is Main";
     $scope.isLogged = false;
