@@ -21,6 +21,7 @@ var cssFilesToInject = [
   'libs/ngDialog/css/ngDialog.css',
   'libs/ngDialog/css/ngDialog-theme-default.css',
   'libs/jquery/dist/jquery.css',
+  'libs/ng-admin/build/ng-admin.min.css'
 ];
 
 
