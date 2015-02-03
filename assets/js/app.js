@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 var adminApp = angular.module('leagueAdmin',
   ['ngRoute', 'appRoutes', 'AdminCtrl', 'ng-admin']);
 
@@ -52,12 +52,12 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
     var user = new Entity('user');
     var submission = new Entity('submission');
     var comment = new Entity('comment');
-    var user_type = new Entity('user_type');
+    var user_type = new Entity('Usertype');
     var tag = new Entity('tag');
     var champ = new Entity('Champion');
-    var champ_role = new Entity('Champion_role');
-    var follower = new Entity('User_Follower');
-    var sub_type = new Entity('Submission_type');
+    var champ_role = new Entity('ChampionRole');
+    var follower = new Entity('UserFollower');
+    var sub_type = new Entity('Submissiontype');
     var state = new Entity('SubmissionState');
 
     //add browserable entities
@@ -245,9 +245,6 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
     console.log("Finish loading admin panel");
 });
 
-var mainApp = angular.module('leagueMontage',
-    ['ngRoute', 'appRoutes', 'MainController']);
-=======
 
 var app = angular.module("app", [
   'ngRoute',
@@ -266,4 +263,4 @@ app.config(['$routeProvider', function($routeProvider) {
       redirectTo: '/submit'
     });
 }]);
->>>>>>> master
+
