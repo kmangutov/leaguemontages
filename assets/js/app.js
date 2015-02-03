@@ -5,12 +5,9 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
     
     // use the custom query parameters function to format the API request correctly
     RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, headers, params) {
+        
         if (operation == "getList") {
-            // custom pagination params
-            //params._start = (params._page - 1) * params._perPage;
-            //params._end = params._page * params._perPage;
 
-            //custom pagination for sails
             params.skip = (params._page - 1) * params._perPage;
             params.limit = params._perPage;
 
@@ -34,7 +31,18 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
             }
         }
         
-        return { element: element, headers: headers, params: params };
+        console.log('url to ' + url);
+        console.log('param --');
+        for (var key in params) {
+            console.log(key, params[key]);
+        }
+
+        console.log('element --');
+        for (var key in element){
+            console.log(key);
+        }
+        
+        return { headers: headers, element: element, params: params };
     });
 
     var app = new Application('League Montages AdminPanel') // application main title
@@ -45,6 +53,11 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
     var comment = new Entity('comment');
     var user_type = new Entity('user_type');
     var tag = new Entity('tag');
+    var champ = new Entity('Champion');
+    var champ_role = new Entity('Champion_role');
+    var follower = new Entity('User_Follower');
+    var sub_type = new Entity('Submission_type');
+    var state = new Entity('SubmissionState');
 
     //add browserable entities
     app.addEntity(user)
@@ -60,45 +73,161 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
     //config dashboard view 
     user.dashboardView()
         .title('Recent user')
-        .order(1)
         .limit(5)
-        .fields([new Field('id'), new Field('display_name').label('user name')]);
+        .fields([new Field('id'), new Field('display_name').label('User Name')]);
 
     user.listView()
         .title('Users')
         .infinitePagination(true)
         .fields([
             new Field('id').label('ID'),
-            new Field('createdAt').type('date').label('Joined date'),
-            //new Reference('user_type')
-            //    .targetEntity(user_type)
-            //    .targetField(new Field('utype')),
+            new Field('display_name').label('Name'),
+            new Field('user_type').label('Type').map(function(object){
+                return object.utype;
+            })
             //new ReferenceMany('submissions')
             //    .targetEntity(submission)
             //    .targetField(new Field('title'))
         ])
         .listActions(['show','edit','delete']);
 
-    //create user
-    //user.creationView()
-    //    .field([
 
-    //        ])
-    //edit user
-    //user.editionView()
-    //    .title('Edit user name "{{ entnty.values.display_name }}"')
-    //    .action(['list', 'show', 'delete',])
+    user.editionView()
+        .title('Edit User Information')
+        .actions(['list', 'show', 'delete'])
+        .fields([
+            new Field('display_name'),
+            new Reference('user_type')
+                .targetEntity(user_type)
+                .targetField(new Field('utype')),
+        ]);
 
-    //user.showView()
-    //    .fields([
-    //        user.listView().fields(),
-    //        new ReferenceMany('comments')
-    //            .targetEntity(comment)
-    //            .targetField(new Field('text'))
-    //    ]);
+    user.showView()
+        .fields([
+            user.listView().fields(),
+            new Field('createdAt').label('join date').type('date'),
+            new Field('updatedAt').label('last update').type('date'),
+            new ReferencedList('User_follower').label('followers')
+                .targetEntity(follower)
+                .targetReferenceField('following')
+                .targetFields([new Field('id'), 
+                               new Field('follower').map(function(object){
+                                    return object.display_name;
+                               })]),
+            /*new ReferencedList('User_follower').label('followings')
+                .targetEntity(follower)
+                .targetReferenceField('follower')
+                .targetFields([new Field('id'), 
+                               new Field('following').map(function(object){
+                                    return object.display_name;
+                               })]),
+            */
+            new ReferencedList('Submission')
+                .targetEntity(submission)
+                .targetReferenceField('createdBy')
+                .targetFields([
+                    new Field('title'),
+                    new Field('url'),
+                    new Field('description')
+                ]),
+            new ReferencedList('Comment')
+                .targetEntity(comment)
+                .targetReferenceField('written_by')
+                .targetFields([
+                    new Field('parentID'),
+                    new Field('text'),
+                    new Field('createdAt').type('date'),
+                ])
+                .cssClasses('col-sm-4')
+        ]);
     
     //submission view config
+    submission.menuView()
+        .icon('<span class="glyphicon glyphicon-facetime-video"></span>');
 
+    submission.dashboardView()
+        .title('Submissions')
+        .order(1)
+        .limit(5)
+        .fields([
+            new Field('title'), 
+            new Field('createdAt').type('date'), 
+            new Field('state').map(function(object){
+                return object.state;
+            })]);
+    
+    submission.listView()
+        .title('Submissions')
+        .infinitePagination(true)
+        .fields([
+            new Field('title').label('title'),
+            new Field('createdAt').type('date'),
+            new Field('createdBy').map(function(object){
+                return object.id;
+            }),
+            new Field('sub_type').label('Submission type')
+                .map(function(object){
+                    return object.name;
+                }),
+            new Field('champ_type').label('Champion')
+                .map(function(object){
+                    return object.name;
+                }),
+            new Field('champ_role').label('Champion role')
+                .map(function(object){
+                    return object.name;
+                }),
+            new Field('state').label('State')
+                .map(function(object){
+                    return object.state;
+                })
+        ])
+        .listActions(['show','edit','delete']);
+    
+    submission.editionView()
+        .title('Edit submission')
+        .actions(['list', 'show', 'delete'])
+        .fields([
+            new Field('title'),
+            new Field('url'),
+            new Field('description'),
+            new Field('state'),
+            new Reference('sub_type').label('Submission type')
+                .targetEntity(sub_type)
+                .targetField(new Field('name')),
+            new Reference('champ_type').label('Champion')
+                .targetEntity(champ)
+                .targetField(new Field('name')),
+            new Reference('champ_role').label('Champion role')
+                .targetEntity(champ_role)
+                .targetField(new Field('name')),
+            new Reference('state').label('State')
+                .targetEntity(state)
+                .targetField(new Field('state'))
+        ]);
+
+
+    submission.showView()
+        .fields([
+            submission.listView().fields(),
+            new Field('url'),
+            new Field('description'),
+            new Field('view').type('number'),
+            //new ReferenceMany('tag')
+            //    .targetEntity(tag)
+            //    .targetField(new Field('name')),
+            /*new ReferencedList('Comment')
+                .targetEntity(comment)
+                .targetReferenceField('written_to')
+                .targetFields([
+                    new Field('written_by').map(function(object){
+                        return object.display_name;
+                    }),
+                    new Field('text')
+                ]),
+            */
+        ]);
+        
     //comment view config
 
     //tag view config
