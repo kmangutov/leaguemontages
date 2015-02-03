@@ -67,11 +67,22 @@ module.exports = {
             ]
         };
 
+        fixtureSubState = {
+            name: "SubmissionState",
+            model: SubmissionState,
+            data: [
+                {state: "Pending"},
+                {state: "Approved"},
+                {state: "Rejected"},
+            ]
+        };
+
         fixtures = [
             fixtureBadgeType,
             fixtureChampionRole,
             fixtureSubmissionType,
-            fixtureUserType
+            fixtureUserType,
+            fixtureSubState
         ];
 
         fixtures.forEach(function(fixture){

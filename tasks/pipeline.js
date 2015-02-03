@@ -20,6 +20,8 @@ var cssFilesToInject = [
   'libs/animate.css/animate.css',
   'libs/ngDialog/css/ngDialog.css',
   'libs/ngDialog/css/ngDialog-theme-default.css',
+  'libs/jquery/dist/jquery.css',
+  'libs/ng-admin/build/ng-admin.min.css'
 ];
 
 
@@ -37,6 +39,7 @@ var jsFilesToInject = [
   'libs/angular-resource/angular-resource.js',
   'libs/bootstrap/dist/js/bootstrap.js',
   'libs/ngDialog/js/ngDialog.js',
+  'libs/ng-admin/build/ng-admin.min.js',
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
   'js/app.js',
