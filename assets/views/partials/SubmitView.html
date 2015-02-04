@@ -1,18 +1,23 @@
-<h1>SubmitView</h1>
-<h2>{{ message }}</h2>
+
+<form ng-submit="submit()">
 <ul>
 
-  <select>
-    <option ng-repeat="champion in champions">
-      {{champion.name}}
-    </option>
-  </select>
+  <li>Title:<input type="text" name="title" ng-model="postData.title"></li>
+  <li>URL:<input type="text" name="url" ng-model="postData.url"></li>
 
-  <select>
-    <option ng-repeat="role in roles">
-      {{role.name}}
-    </option>
-  </select>
+  <li>
+    <select ng-model="postData.champ_type" 
+            ng-options="{'id':champion.id} as champion.name for champion in champions track by champion.id">
+    </select>
+  </li>
 
+  <li>
+    <select ng-model="postData.champ_role"
+            ng-options="{'id':role.id} as role.name for role in roles track by role.id">
+    </select>
+  </li>
+
+  <li><button type="submit">Create</button></li>
 
 </ul>
+</form>

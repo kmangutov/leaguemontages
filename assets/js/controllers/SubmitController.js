@@ -12,4 +12,11 @@ controllers.controller("SubmitController",
     ChampionService.query({}, function(championService) {
       $scope.champions = championService;
     });
+
+    $scope.postData = {};
+
+    $scope.submit = function() {
+      var stringData = JSON.stringify($scope.postData);
+      console.log("PUT " + stringData); 
+    }
 }]);
