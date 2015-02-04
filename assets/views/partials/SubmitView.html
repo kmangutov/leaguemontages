@@ -7,13 +7,13 @@
 
   <li>
     <select ng-model="postData.champ_type" 
-            ng-options="{'id':champion.id} as champion.name for champion in champions track by champion.id">
+            ng-options="champion.id as champion.name for champion in champions">
     </select>
   </li>
 
   <li>
     <select ng-model="postData.champ_role"
-            ng-options="{'id':role.id} as role.name for role in roles track by role.id">
+            ng-options="role.id as role.name for role in roles">
     </select>
   </li>
 
