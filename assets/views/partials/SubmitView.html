@@ -1,13 +1,18 @@
 <h1>SubmitView</h1>
 <h2>{{ message }}</h2>
 <ul>
-	<li ng-repeat="role in roles">
-    <span>{{role.id + " " + role.name}}</span>
-  </li>
+
+  <select>
+    <option ng-repeat="champion in champions">
+      {{champion.name}}
+    </option>
+  </select>
 
   <select>
     <option ng-repeat="role in roles">
-    {{role.name}}
+      {{role.name}}
     </option>
   </select>
+
+
 </ul>
