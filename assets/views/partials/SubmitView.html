@@ -4,4 +4,10 @@
 	<li ng-repeat="role in roles">
     <span>{{role.id + " " + role.name}}</span>
   </li>
+
+  <select>
+    <option ng-repeat="role in roles">
+    {{role.name}}
+    </option>
+  </select>
 </ul>

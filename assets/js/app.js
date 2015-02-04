@@ -256,7 +256,7 @@ app.config(['$routeProvider', function($routeProvider) {
 
   $routeProvider.
     when('/submit', {
-      templateUrl: 'views/SubmitView.html',
+      templateUrl: 'views/partials/SubmitView.html',
       controller: 'SubmitController'
     }).
     otherwise({
