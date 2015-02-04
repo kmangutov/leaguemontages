@@ -1,21 +1,23 @@
 function doFixture(fixture) {
-    //first, check if this fixture is populated
-    fixture.model.findOne(fixture.data[0], function(err, output) {
 
-        if(err) sails.log("Error in fixtures: " + err);
-        else if(!output) {
+    fixture.data.forEach(function(data) {
 
-            //if it's not populated, insert data
-            sails.log("Running fixture: " + fixture.name);
-            fixture.data.forEach(function(item) {
+        fixture.model.findOne(data, function(err, output) {
 
-                fixture.model.create(item).exec(function(e, newItem) {
-                    if(e) sails.log("Error in fixture '"+fixture.name+"': " + e);
+            var location  = fixture.name + "::" + JSON.stringify(data);
+            if(err) sails.log("Error in fixture " + location + ": " + err);
+            else if(!output) {
+                sails.log("Running fixture " + location);
+
+                fixture.model.create(data).exec(function(e, newItem) {
+
+                    if(e) sails.log("Error in fixture " + location + ": " + e);
                 });
-            });
-        }
-        else if(output) 
-            sails.log("Ignoring fixture: " + fixture.name);
+            }
+            else if(output) {
+                sails.log("Ignoring fixture " + location);
+            }
+        });
     });
 }
 
@@ -77,12 +79,24 @@ module.exports = {
             ]
         };
 
+        fixtureChampion = {
+            name: "Champion",
+            model: Champion,
+            data: [
+                {name: "Aatrox"},
+                {name: "Ahri"},
+                {name: "Akali"},
+                {name: "Lissandra"}
+            ]
+        };
+
         fixtures = [
             fixtureBadgeType,
             fixtureChampionRole,
             fixtureSubmissionType,
             fixtureUserType,
-            fixtureSubState
+            fixtureSubState,
+            fixtureChampion
         ];
 
         fixtures.forEach(function(fixture){
