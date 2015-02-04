@@ -16,10 +16,11 @@
         state: {
             type: 'string',
             enum: ['approved', 'pending', 'rejected'],
-            required: true
+            defaultsTo: 'pending',
+            required: true         
         },
 
-        has: {
+        submissions: {
             collection: 'Submission',
             via: 'tags'
         },
@@ -39,7 +40,6 @@
             if(tag) //if there no tag exist
                 return next('Cannot create same tag');
 
-            values.state = 'pending';
             next();
         });
     }

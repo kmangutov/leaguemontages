@@ -42,8 +42,13 @@ module.exports.routes = {
 
   '/admin': {
     view : 'admin'
-  }
-  
+  },
+
+  /*'GET /api/v1.0/comment/:id':{
+    controller: 'CommentController',
+    action: 'get'
+  }*/
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
