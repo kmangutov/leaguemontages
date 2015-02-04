@@ -4,6 +4,12 @@ var adminApp = angular.module('leagueAdmin',
 
 adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Field, Reference, ReferencedList, ReferenceMany, RestangularProvider) {
     
+    function truncate(value) {
+        if (!value) 
+            return '';
+        return value.length > 50 ? value.substr(0, 50) + '...' : value;
+    }
+
     // use the custom query parameters function to format the API request correctly
     RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, headers, params) {
         
@@ -31,23 +37,14 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
                 delete params._filters;
             }
         }
-        
-        console.log('url to ' + url);
-        console.log('param --');
-        for (var key in params) {
-            console.log(key, params[key]);
-        }
-
-        console.log('element --');
-        for (var key in element){
-            console.log(key);
-        }
-        
+        console.log(url);
+        console.log(headers);
+        console.log(params);
         return { headers: headers, element: element, params: params };
     });
 
     var app = new Application('League Montages AdminPanel') // application main title
-        .baseApiUrl('http://localhost:1337/api/v1.0/');
+        .baseApiUrl('http://localhost:1337/api/v1.0/'); //base api endpoint
 
     var user = new Entity('user');
     var submission = new Entity('submission');
@@ -59,13 +56,13 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
     var follower = new Entity('UserFollower');
     var sub_type = new Entity('Submissiontype');
     var state = new Entity('SubmissionState');
+    var media = new Entity('Media');
 
     //add browserable entities
     app.addEntity(user)
         .addEntity(submission)
         .addEntity(comment)
-        .addEntity(user_type)
-        .addEntity(tag);
+        .addEntity(champ);
 
     //////////////////////////////////////////////////////////////////////
     //                                                                  //
@@ -76,7 +73,7 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
     //////////////////////////////////////////////////////////////////////
     //icon of entity in menu
     user.menuView()
-        .icon('<span class="glyphicon glyphicon-file"></span>');
+        .icon('<span class="glyphicon glyphicon-user"></span>');
 
     //config dashboard view 
     user.dashboardView()
@@ -134,7 +131,7 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
                 .targetEntity(submission)
                 .targetReferenceField('createdBy')
                 .targetFields([
-                    new Field('title'),
+                    new Field('title').isDetailLink(true),
                     new Field('url'),
                     new Field('description')
                 ]),
@@ -143,12 +140,19 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
                 .targetReferenceField('written_by')
                 .targetFields([
                     new Field('parentID'),
-                    new Field('text'),
+                    new Field('text').isDetailLink(true),
                     new Field('createdAt').type('date'),
                 ])
                 .cssClasses('col-sm-4')
         ]);
-    
+
+    //////////////////////////////////////////////////////////////////////
+    //                                                                  //
+    //                                                                  //                                  
+    //                Submission model admin views                      //
+    //                                                                  //
+    //                                                                  //
+    //////////////////////////////////////////////////////////////////////
     //submission view config
     submission.menuView()
         .icon('<span class="glyphicon glyphicon-facetime-video"></span>');
@@ -168,7 +172,7 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
         .title('Submissions')
         .infinitePagination(true)
         .fields([
-            new Field('title').label('title'),
+            new Field('title').label('title').isDetailLink(true),
             new Field('createdAt').type('date'),
             new Field('createdBy').map(function(object){
                 return object.id;
@@ -211,7 +215,11 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
                 .targetField(new Field('name')),
             new Reference('state').label('State')
                 .targetEntity(state)
-                .targetField(new Field('state'))
+                .targetField(new Field('state')),
+            new ReferenceMany('tag')
+                .targetEntity(tag)
+                .targetField(new Field('name'))
+                .cssClasses('col-sm-4')
         ]);
 
 
@@ -221,9 +229,7 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
             new Field('url'),
             new Field('description'),
             new Field('view').type('number'),
-            //new ReferenceMany('tag')
-            //    .targetEntity(tag)
-            //    .targetField(new Field('name')),
+
             /*new ReferencedList('Comment')
                 .targetEntity(comment)
                 .targetReferenceField('written_to')
@@ -236,14 +242,96 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
             */
         ]);
         
+    //////////////////////////////////////////////////////////////////////
+    //                                                                  //
+    //                                                                  //                                  
+    //                   Comment model admin views                      //
+    //                                                                  //
+    //                                                                  //
+    //////////////////////////////////////////////////////////////////////
     //comment view config
+    comment.menuView()
+        .icon('<span class="glyphicon glyphicon-comment"></span>');
 
-    //tag view config
+    comment.dashboardView()
+        .title('Comments')
+        .limit(5)
+        .fields([
+            new Field('text').isDetailLink(true).map(truncate)
+        ]);
 
+    comment.listView()
+        .title('Comments')
+        .infinitePagination(true)
+        .fields([
+            new Field('written_by').label('Created by')
+                .map(function(object){
+                    return object.display_name;
+                }),
 
-    //less important entities 
-    //champ role view config
-    //champ type view config 
+            new Field('text').isDetailLink(true)
+        ])
+        .listActions(['show','delete']);
+
+    comment.showView()
+        .fields([
+            comment.listView().fields(),
+            new Field('written_to').label('comment On')
+                .map(function(object){
+                    return object.title;
+                }),
+            new Field('parentId').label('reply to')
+                .map(function(object){
+                    return truncate(object.text);
+                }),
+            new Reference('media').label('Media')
+                .targetEntity(media)
+                .targetField(new Field('media_url'))
+        ]);
+
+    //////////////////////////////////////////////////////////////////////
+    //                                                                  //
+    //                                                                  //                                  
+    //                  Champion model admin views                      //
+    //                                                                  //
+    //                                                                  //
+    //////////////////////////////////////////////////////////////////////
+    champ.menuView()
+        .icon('<span class="glyphicon glyphicon-star"></span>');
+
+    champ.dashboardView()
+        .title('Champions list')
+        .limit(5)
+        .fields([
+            new Field('name').label('Champion name').isDetailLink(true)
+        ]);
+
+    champ.listView()
+        .title('Champions')
+        .infinitePagination(true)
+        .fields([
+            new Field('name').isDetailLink(true)
+        ])
+        .listActions(['show','delete']);
+
+    champ.showView()
+        .fields([
+            new Field('id').label('ID'),
+            new Field('name').label('Champs name'),
+            new ReferencedList('Submission')
+                .targetEntity(submission)
+                .targetReferenceField('champ_type')
+                .targetFields([
+                    new Field('title').isDetailLink(true),
+                    new Field('view').type('number')
+                ])
+        ]);
+
+    champ.creationView()
+        .fields([
+            new Field('name')
+        ]);
+
     //media
     //media type and etc
 
