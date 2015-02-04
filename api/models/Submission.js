@@ -75,7 +75,7 @@ module.exports = {
 
 		tags: {
 			collection: 'Tag',
-			via: 'has',
+			via: 'submissions',
 			dominant: true
 		},
 
