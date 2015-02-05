@@ -45,6 +45,7 @@ var jsFilesToInject = [
   // will be injected here in no particular order.
   'js/app.js',
   'js/adminApp.js',
+  'js/AppControllers.js',
   'js/controllers/*.js',
   'js/services/*.js',
   'js/**.js'

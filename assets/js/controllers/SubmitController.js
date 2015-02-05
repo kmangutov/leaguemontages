@@ -1,7 +1,4 @@
-
-var controllers = angular.module('appControllers', ['appServices']);
-
-controllers.controller("SubmitController", 
+angular.module('appControllers').controller("SubmitController", 
   ['$scope', 'ChampionRoleService', 'ChampionService', 'SubmissionService',
   function($scope, ChampionRoleService, ChampionService, SubmissionService) {
 
