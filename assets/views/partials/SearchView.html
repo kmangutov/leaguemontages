@@ -1,0 +1,38 @@
+<div class="searchField">
+    <form ng-submit="submit()">
+        <ul>
+
+            <li>Search: <input type="text" name="keyword" ng-model="keyword" ng-init="keyword=''"></li>
+            <li><button type="submit">Search</button></li>
+            <li>
+                <select ng-model="getData.champ_type" 
+                    ng-options="champion.id as champion.name for champion in champions">            
+                </select>
+            </li>
+
+            <li>
+                <select ng-model="getData.champ_role"
+                    ng-options="role.id as role.name for role in roles">
+                </select>
+            </li>
+
+            
+        </ul>
+    </form>
+</div>
+
+<div class="searchResult" ng-show="showResult">
+    <div ng-show="!hasData">
+        No search results
+    </div>
+
+    <div ng-show="hasData">
+        <table>
+            <tr ng-repeat="submission in submissions">
+                <td> {{ submission.title }} </td>
+                <td> {{ submission.url }} </td>
+                <td> {{ submission.createdBy.display_name }} </td>
+            </tr>
+        </table>
+    </div>
+</div>
