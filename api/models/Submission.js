@@ -86,6 +86,7 @@ module.exports = {
 		
 		state: {
 			model: 'SubmissionState',
+			defaultsTo: 4 //default to pending 
 		},
 
 		incrementView:function(){
