@@ -36,13 +36,8 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
                 }
                 delete params._filters;
             }
-
-            
         }
         params['populate'] = '[]';
-        console.log(url);
-        console.log(headers);
-        console.log(params);
 
         return { headers: headers, element: element, params: params };
     });
@@ -97,9 +92,9 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
         .fields([
             new Field('id').label('ID'),
             new Field('display_name').label('Name'),
-            new Field('user_type').label('Type').map(function(object){
-                return object.utype;
-            })
+            new Reference('user_type').label('Type')
+                .targetEntity(user_type)
+                .targetField(new Field('utype'))
             //new ReferenceMany('submissions')
             //    .targetEntity(submission)
             //    .targetField(new Field('title'))
