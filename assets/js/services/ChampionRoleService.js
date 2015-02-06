@@ -1,5 +1,4 @@
-
-var services = angular.module('appServices', ['ngResource']);
+var services = angular.module('appServices');
 
 services.factory('ChampionRoleService', 
   function($resource){
