@@ -9,7 +9,6 @@
                     ng-options="champion.id as champion.name for champion in champions">            
                 </select>
             </li>
-
             <li>
                 <select ng-model="getData.champ_role"
                     ng-options="role.id as role.name for role in roles">
@@ -19,6 +18,9 @@
                 Order by 
             </li>
             <li>
+                <select ng-model="getData.badgeType"
+                    ng-options="badgeType.id as badgeType.name for badgeType in badgeTypes">
+                </select>
                 <!-- order by badges -->
             </li>
 
