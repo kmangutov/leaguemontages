@@ -15,8 +15,19 @@
                     ng-options="role.id as role.name for role in roles">
                 </select>
             </li>
+            <li>
+                Order by 
+            </li>
+            <li>
+                <!-- order by badges -->
+            </li>
 
-            
+            <li>
+                <!-- order by rating --> 
+            </li>
+            <li>
+                <!-- time period option -->
+            </li>
         </ul>
     </form>
 </div>
@@ -32,6 +43,8 @@
                 <td> {{ submission.title }} </td>
                 <td> {{ submission.url }} </td>
                 <td> {{ submission.createdBy.display_name }} </td>
+                <td> {{  <!-- ratings -- > }} </td>
+                <td> {{  <!-- badges} -- > }} </td>
             </tr>
         </table>
     </div>
