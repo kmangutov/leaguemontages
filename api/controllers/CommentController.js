@@ -10,5 +10,14 @@ module.exports = {
 
             return res.json(200, comment);
         })
+
+        /*
+             SELECT * 
+                FROM comments as x 
+                JOIN comments as y 
+                ON y.parentId = x.id AND x.written_to = subid
+                ORDER 
+                BY x.updatedAt, y.updatedAt; 
+        */
     }
 };
