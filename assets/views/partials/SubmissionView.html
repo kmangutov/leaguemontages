@@ -1,0 +1,35 @@
+<div class="submissionView">
+    <!-- display all infomation about a particular submission -->
+   <div class="sub_title">
+        {{ subData.title }}
+    </div>
+
+    <div class="sub_misc">
+        <!-- badge, rating, view counts, etc -->
+    </div>
+    <div class="sub_body">
+        created at : {{ subData.createdAt | date:'MM/dd/yyyy @ h:mma'}} <br/>
+        url : {{ subData.url }} <br/>
+        title : {{ subData.title }} <br/>
+        created by : {{ userName }} <br/>
+        description : {{ subData.description }} <br/>
+    </div>
+    
+    <br/>
+    <br/>
+    
+    <div class="sub_footer">
+        <!-- social integration -->
+        <div class="comments list">
+            <p> Comments </p>
+            <table class="comment table">
+            <!-- iterate over comments -->
+                 <tr ng-repeat="comment in comments">
+                    <td> {{ comment.written_by.display_name }} </td>
+                    <td> {{ comment.createdAt | date:'MM/dd/yyyy @ h:mma'}} </td>
+                    <td> {{ comment.text }} </td>
+                 </tr>
+            </table>
+        </div>
+    </div>
+</div>

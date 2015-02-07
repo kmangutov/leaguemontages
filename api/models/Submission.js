@@ -25,7 +25,7 @@ module.exports = {
 		},
 		
 		createdBy: {
-			model: 'User',
+			model: 'User'
 		},
 		
 		champ_type: {
@@ -38,7 +38,7 @@ module.exports = {
 		},	
 
 		sub_type: {
-			model: 'SubmissionType',
+			model: 'SubmissionType'
 		},
 
 		ratings: {

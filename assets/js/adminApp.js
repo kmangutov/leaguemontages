@@ -37,9 +37,8 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
                 delete params._filters;
             }
         }
-        console.log(url);
-        console.log(headers);
-        console.log(params);
+        params['populate'] = '[]';
+
         return { headers: headers, element: element, params: params };
     });
 
@@ -79,7 +78,13 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
     user.dashboardView()
         .title('Recent user')
         .limit(5)
-        .fields([new Field('id'), new Field('display_name').label('User Name')]);
+        .fields([
+            new Field('id'), 
+            new Field('display_name').label('User Name'),
+            new Reference('user_type')
+                .targetEntity(user_type)
+                .targetField(new Field('utype'))
+        ]);
 
     user.listView()
         .title('Users')
@@ -87,9 +92,9 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
         .fields([
             new Field('id').label('ID'),
             new Field('display_name').label('Name'),
-            new Field('user_type').label('Type').map(function(object){
-                return object.utype;
-            })
+            new Reference('user_type').label('Type')
+                .targetEntity(user_type)
+                .targetField(new Field('utype'))
             //new ReferenceMany('submissions')
             //    .targetEntity(submission)
             //    .targetField(new Field('title'))
@@ -164,9 +169,10 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
         .fields([
             new Field('title'), 
             new Field('createdAt').type('date'), 
-            new Field('state').map(function(object){
-                return object.state;
-            })]);
+            new Reference('state')
+                .targetEntity(state)
+                .targetField(new Field('state'))
+            ]);
     
     submission.listView()
         .title('Submissions')
@@ -174,25 +180,21 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
         .fields([
             new Field('title').label('title').isDetailLink(true),
             new Field('createdAt').type('date'),
-            new Field('createdBy').map(function(object){
-                return object.id;
-            }),
-            new Field('sub_type').label('Submission type')
-                .map(function(object){
-                    return object.name;
-                }),
-            new Field('champ_type').label('Champion')
-                .map(function(object){
-                    return object.name;
-                }),
-            new Field('champ_role').label('Champion role')
-                .map(function(object){
-                    return object.name;
-                }),
-            new Field('state').label('State')
-                .map(function(object){
-                    return object.state;
-                })
+            new Reference('createdBy')
+                .targetEntity(user)
+                .targetField(new Field('display_name')),
+            new Reference('sub_type').label('Submission type')
+                .targetEntity(sub_type)
+                .targetField(new Field('name')),
+            new Reference('champ_type').label('Champion')
+                .targetEntity(champ)
+                .targetField(new Field('name')),
+            new Reference('champ_role').label('Champion role')
+                .targetEntity(champ_role)
+                .targetField(new Field('name')),
+            new Reference('state').label('State')
+                .targetEntity(state)
+                .targetField(new Field('state'))
         ])
         .listActions(['show','edit','delete']);
     
@@ -257,17 +259,17 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
         .title('Comments')
         .limit(5)
         .fields([
-            new Field('text').isDetailLink(true).map(truncate)
+            new Field('text').isDetailLink(true).map(truncate),
+            new Field('createdAt').type('date').label('Date')
         ]);
 
     comment.listView()
         .title('Comments')
         .infinitePagination(true)
         .fields([
-            new Field('written_by').label('Created by')
-                .map(function(object){
-                    return object.display_name;
-                }),
+            new Reference('written_by').label('Created by')
+                .targetEntity(user)
+                .targetField(new Field('display_name')),
 
             new Field('text').isDetailLink(true)
         ])
@@ -276,14 +278,15 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
     comment.showView()
         .fields([
             comment.listView().fields(),
-            new Field('written_to').label('comment On')
-                .map(function(object){
-                    return object.title;
-                }),
-            new Field('parentId').label('reply to')
-                .map(function(object){
-                    return truncate(object.text);
-                }),
+            new Reference('written_to').label('comment On')
+                .targetEntity(submission)
+                .targetField(
+                    new Field('title')
+                    //new Field('createdAt').type('date').label('creation date')
+                ),
+            new Reference('parentId').label('reply to')
+                .targetEntity(comment)
+                .targetField(new Field('id')),
             new Reference('media').label('Media')
                 .targetEntity(media)
                 .targetField(new Field('media_url'))

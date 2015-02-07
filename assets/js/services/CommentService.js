@@ -1,9 +1,10 @@
+
 var services = angular.module('appServices');
 
-services.factory('ChampionRoleService', 
+services.factory('CommentService', 
   function($resource){
 
-  return $resource('/api/v1.0/ChampionRole', {}, {
+  return $resource('/api/v1.0/comment', {}, {
     query: {
       method: 'GET',
       params: {},

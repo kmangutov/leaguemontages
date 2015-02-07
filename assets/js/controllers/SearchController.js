@@ -1,13 +1,17 @@
 angular.module('appControllers').controller("SearchController", 
-  ['$scope', 'ChampionRoleService', 'ChampionService', 'SubmissionService',
-  function($scope, ChampionRoleService, ChampionService, SubmissionService) {
+  ['$scope', 'ChampionRoleService', 'ChampionService', 'BadgeTypeService', 'SubmissionService',
+  function($scope, ChampionRoleService, ChampionService, BadgeTypeService, SubmissionService) {
+
+    ChampionService.query({}, function(championService) {
+      $scope.champions = championService;
+    });
 
     ChampionRoleService.query({}, function(championRoleService) {
       $scope.roles = championRoleService;
     });
 
-    ChampionService.query({}, function(championService) {
-      $scope.champions = championService;
+    BadgeTypeService.query({}, function(badgeService){
+      $scope.badgeTypes = badgeService;
     });
 
     $scope.getData = {};
@@ -21,6 +25,8 @@ angular.module('appControllers').controller("SearchController",
       //manipulate query
       if($scope.keyword != "")
         $scope.getData.title = {"contains":$scope.keyword};
+      
+      //if badgetype is on, order desc count badge of badgetype
       
       //add other attribute fields
       var query = {};
@@ -40,19 +46,5 @@ angular.module('appControllers').controller("SearchController",
 
           $scope.getData = {};
       });
-      /*
-      $scope.showResult = true;
-      console.log("result??");
-      console.log($scope.submissions);
-      
-      $scope.submissions.$promise.then(function(result){
-         $scope.result = result;
-         console.log(result);
-         if(result.lenght != 0)
-            $scope.hasData = true;
-          else
-            $scope.hasData = false;
-      });
-      */
     }
 }]);
