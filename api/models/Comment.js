@@ -44,15 +44,15 @@
                 return next(err);
             if(!user)
                 return next("User not found");
+            //check submission
+            Submission.findOne({id:values.written_to}).exec(function(err,sub){
+                if(err)
+                    return next(err);
+                if(!sub)
+                    return next("Submission not found");
+
+                next();
+            });
         });
-
-        Submission.findOne({id:values.written_to}).exec(function(err,sub){
-            if(err)
-                return next(err);
-            if(!sub)
-                return next("Submission not found");
-        })
-
-        next();
     }
 };
