@@ -44,6 +44,11 @@ module.exports.routes = {
     view : 'admin'
   },
 
+  '/api/v1.0/upload':{
+    controller: 'UploadController',
+    action: 'upload'
+  }
+
   /*'GET /api/v1.0/comment/:id':{
     controller: 'CommentController',
     action: 'get'
