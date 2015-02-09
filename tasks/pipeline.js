@@ -40,6 +40,8 @@ var jsFilesToInject = [
   'libs/bootstrap/dist/js/bootstrap.js',
   'libs/ngDialog/js/ngDialog.js',
   'libs/ng-admin/build/ng-admin.min.js',
+  'libs/ng-file-upload/angular-file-upload.js',
+  'libs/ng-file-upload/angular-file-upload-shim.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.

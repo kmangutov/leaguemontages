@@ -28,7 +28,8 @@
     "cron":"~1.0.6",
     "winston":"~0.8.3",
     "waterlock":"~0.0.13",
-    "waterlock-local-auth":"~0.0.5"
+    "waterlock-local-auth":"~0.0.5",
+  	"skipper": "~0.5.5"
   },
 
   "scripts": {
