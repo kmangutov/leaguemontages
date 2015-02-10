@@ -11,8 +11,11 @@
         created at : {{ subData.createdAt | date:'MM/dd/yyyy @ h:mma'}} <br/>
         url : {{ subData.url }} <br/>
         title : {{ subData.title }} <br/>
-        created by : {{ userName }} <br/>
+        created by : {{ userName }} <br/> 
         description : {{ subData.description }} <br/>
+
+        <video ng-show="subData.url" controls ng-src="{{ subData.url }}"
+                width="400" height="300"></video>
     </div>
     
     <br/>
