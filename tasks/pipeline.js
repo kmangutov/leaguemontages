@@ -43,13 +43,14 @@ var jsFilesToInject = [
   'libs/ng-file-upload/angular-file-upload.js',
   'libs/ng-file-upload/angular-file-upload-shim.js',
 
-  // All of the rest of your client-side js files
-  // will be injected here in no particular order.
   'js/app.js',
   'js/adminApp.js',
   'js/AppServices.js',
   'js/AppControllers.js',
   'js/appRoutes.js',
+
+  // All of the rest of your client-side js files
+  // will be injected here in no particular order.
   'js/controllers/*.js',
   'js/services/*.js'
 ];
