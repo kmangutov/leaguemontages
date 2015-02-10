@@ -1,9 +1,8 @@
 
 <form ng-submit="submit()">
 <ul>
-
   <li>Title:<input type="text" name="title" ng-model="postData.title"></li>
-  
+  <li>Description:<input type="text" name="desc" ng-model="postData.description"></li>
   <li>
     <!-- upload file -->
     <div class="btn btn-default" 
@@ -21,6 +20,12 @@
   <li>
     <select ng-model="postData.champ_role"
             ng-options="role.id as role.name for role in roles">
+    </select>
+  </li>
+
+  <li>
+    <select ng-model="postData.sub_type"
+            ng-options="sub_type.id as sub_type.name for sub_type in sub_types">
     </select>
   </li>
 
