@@ -21,14 +21,14 @@
                 <select ng-model="getData.badgeType"
                     ng-options="badgeType.id as badgeType.name for badgeType in badgeTypes">
                 </select>
-                <!-- order by badges -->
+                <!-- TODO: order by badges -->
             </li>
 
             <li>
                 <!-- order by rating --> 
             </li>
             <li>
-                <!-- time period option -->
+                <!-- TODO: time period option -->
             </li>
         </ul>
     </form>
@@ -42,6 +42,7 @@
     <div ng-show="hasData">
         <table>
             <tr ng-repeat="submission in submissions">
+                <!-- TODO: show necessary information about submission --> 
                 <td> {{ submission.title }} </td>
                 <td> {{ submission.url }} </td>
                 <td> {{ submission.createdBy.display_name }} </td>

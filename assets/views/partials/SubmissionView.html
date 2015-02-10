@@ -5,7 +5,7 @@
     </div>
 
     <div class="sub_misc">
-        <!-- badge, rating, view counts, etc -->
+        <!-- TODO: badge, rating, view counts, etc -->
     </div>
     <div class="sub_body">
         created at : {{ subData.createdAt | date:'MM/dd/yyyy @ h:mma'}} <br/>
@@ -14,19 +14,19 @@
         created by : {{ userName }} <br/> 
         description : {{ subData.description }} <br/>
 
-        <video ng-show="subData.url" controls ng-src="{{ subData.url }}"
-                width="400" height="300"></video>
+        <video ng-show="subData.url" ng-src="{{ subData.url }}"  controls width="600" height="400">
+        </video>
     </div>
     
     <br/>
     <br/>
     
     <div class="sub_footer">
-        <!-- social integration -->
+        <!-- TODO: social integration -->
         <div class="comments list">
             <p> Comments </p>
             <table class="comment table">
-            <!-- iterate over comments -->
+            <!-- TODO: test with mysql, iterate over comments -->
                  <tr ng-repeat="comment in comments">
                     <td> {{ comment.written_by.display_name }} </td>
                     <td> {{ comment.createdAt | date:'MM/dd/yyyy @ h:mma'}} </td>
