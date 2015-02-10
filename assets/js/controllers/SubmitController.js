@@ -1,6 +1,6 @@
 angular.module('appControllers').controller("SubmitController", 
-  ['$scope', '$location', '$upload', 'ChampionRoleService', 'ChampionService', 'SubmissionService',
-  function($scope, $location, $upload, ChampionRoleService, ChampionService, SubmissionService) {
+  ['$scope', '$window', '$location', '$upload', 'ChampionRoleService', 'ChampionService', 'SubmissionService',
+  function($scope, $window, $location, $upload, ChampionRoleService, ChampionService, SubmissionService) {
 
     ChampionRoleService.query({}, function(championRoleService) {
       $scope.roles = championRoleService;
@@ -17,16 +17,16 @@ angular.module('appControllers').controller("SubmitController",
 
     $scope.file = {};
     $scope.file.data = "";
+    $scope.missingField = false;
 
-    $scope.upload = function () {
-      //console.log($scope.file);
+    $scope.submit = function() {
+      //upload file and get url 
       
       if ($scope.file.data[0]){
-        console.log("uploading file..");
-        console.log($scope.file.data[0]);
+        $scope.missingField = false;
+
         $upload.upload({
           url: 'api/v1.0/upload',
-          //headers: {'Content-Type': $scope.file.data[0].type },
           fileFormDataName: 'uploadFile',
           method: 'POST',
           file: $scope.file.data[0]
@@ -34,28 +34,30 @@ angular.module('appControllers').controller("SubmitController",
           var progressPercentage = parseInt(100.0 * evt.loaded/evt.total);
           console.log('progress: ' + progressPercentage + '% ' + evt.config.data.name);
         }).success(function (data, status, headers, config){
+          //upload video to the server first
           console.log('file ' + config.file.name + ' uploaded. Response: ' + JSON.stringify(data.file[0]));
           var fd = data.file[0].fd.split("/");
           var filename = fd[fd.length -1];
+
+          //generated url and set it to url for postData
           $scope.postData.url = "/cdn/" + filename;
           console.log($scope.postData.url);
+      
+          //post submission
+          var stringData = JSON.stringify($scope.postData);
+          console.log("PUT " + stringData); 
+
+          var submission = new SubmissionService($scope.postData);
+          submission.$save()
+                    .then(function(res){
+              console.log(res.id);
+              $window.location.href = 'http://localhost:1337/kirill#/submission/' + res.id;
+          });   
         });
       }
-      
-    }
-
-    //$scope.uploader = new FileUploader();
-
-    $scope.submit = function() {
-      //upload file and get url 
-      
-      //$scope.upload(); //async?
-      var stringData = JSON.stringify($scope.postData);
-      console.log("PUT " + stringData); 
-
-      var submission = new SubmissionService($scope.postData);
-      submission.$save();
-
-
+      else{
+        $scope.missingField = true;
+      }
     }
 }]);
+
