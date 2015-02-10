@@ -11,11 +11,19 @@
 
 var util = require('util');
 var fixtures = require('../custom_modules/fixtures');
-
+var fs = require('fs'),
+    path = require('path');
 
 //input e.g. fixtureBadgeType
 
 module.exports.bootstrap = function(cb) {
+  var postsSrc = path.join(process.cwd(), 'assets/cdn');
+  var postDst = path.join(process.cwd(), '.tmp/public/cdn');
+  sails.log(postsSrc);
+  fs.symlink(postsSrc, postDst, function(err){
+    if(err)
+        sails.log(err);
+  });
 
   fixtures.run();
 
