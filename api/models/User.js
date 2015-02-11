@@ -17,7 +17,8 @@ module.exports = {
 		},
 
 		user_type: {
-			model: 'UserType'
+			model: 'UserType',
+			defaultsTo: 3
 		},
 
 		submissions: {
