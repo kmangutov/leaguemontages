@@ -1,11 +1,19 @@
 <div class="submissionView">
     <!-- display all infomation about a particular submission -->
-   <div class="sub_title">
+    <div class="sub_title">
         {{ subData.title }}
     </div>
 
     <div class="sub_misc">
         <!-- TODO: badge, rating, view counts, etc -->
+        <table>
+            <tr ng-repeat="badge in badges">
+                <td> {{ }} </td>
+                <td> {{ }} </td>
+        </table>
+        <br/>
+        <p>Ratings: {{ ratings }} </p>
+        <p>Views: {{ viewCount }} </p>
     </div>
     <div class="sub_body">
         created at : {{ subData.createdAt | date:'MM/dd/yyyy @ h:mma'}} <br/>
