@@ -22,7 +22,13 @@ app.config(['$routeProvider', function($routeProvider) {
       controller: 'SubmissionViewController'
     })
 
+    .when('/login', {
+      templateUrl: 'views/partials/LoginView.html',
+      controller: 'LoginViewController'
+    })
+
     .otherwise({
-      redirectTo: '/submit'
+      templateUrl: 'views/index.html',
+      controller: 'MainController'
     });
 }]);
