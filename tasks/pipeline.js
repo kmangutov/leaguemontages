@@ -21,7 +21,6 @@ var cssFilesToInject = [
   'libs/ngDialog/css/ngDialog.css',
   'libs/ngDialog/css/ngDialog-theme-default.css',
   'libs/jquery/dist/jquery.css',
-  'libs/ng-admin/build/ng-admin.min.css'
 ];
 
 
@@ -31,15 +30,15 @@ var jsFilesToInject = [
   
   // Load sails.io before everything else
   'libs/sails.io.js',
+  'libs/jquery/dist/jquery.js',
+  'libs/bootstrap/dist/js/bootstrap.js',
   'libs/angular/angular.js',
 
   // Dependencies like jQuery, or Angular are brought in here
-  'libs/jquery/dist/jquery.js',
+  
   'libs/angular-route/angular-route.js',
   'libs/angular-resource/angular-resource.js',
-  'libs/bootstrap/dist/js/bootstrap.js',
   'libs/ngDialog/js/ngDialog.js',
-  'libs/ng-admin/build/ng-admin.min.js',
   'libs/ng-file-upload/angular-file-upload.js',
   'libs/ng-file-upload/angular-file-upload-shim.js',
 
