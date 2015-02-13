@@ -15,13 +15,15 @@ angular.module('appControllers').controller('LoginViewController',
     $window.sessionStorage.token = null;
 
     $scope.login = function() {
-        //call auth/login
-        //call user/jwt
+
         console.log("login was pressed");
         AuthService.login($scope.formData.email, $scope.formData.password)
             .success(function(loginData){
+                
                 console.log(JSON.stringify(loginData));
                 $scope.formData.name = loginData.display_name;
+                $window.sessionStorage.userid = loginData.id;
+
                 AuthService.getToken()
                     .success(function(data){
                         //keep least amount of info to pass it along with other controller 

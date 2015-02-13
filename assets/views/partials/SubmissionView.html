@@ -7,9 +7,10 @@
     <div class="sub_misc">
         <!-- TODO: badge, rating, view counts, etc -->
         <table>
-            <tr ng-repeat="badge in badges">
-                <td> {{ }} </td>
-                <td> {{ }} </td>
+            <tr ng-repeat="(badgeType, count) in badges">
+                <td>{{ badgeType }}</td>
+                <td>{{ count }}</td>
+            </tr>
         </table>
         <br/>
         <p>Ratings: {{ ratings }} </p>

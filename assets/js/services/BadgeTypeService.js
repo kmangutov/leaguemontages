@@ -12,3 +12,15 @@ services.factory('BadgeTypeService',
     }
   });
 });
+
+services.factory('BadgeService',
+  function($resource) {
+    
+  return $resource('/api/v1.0/Badge', {}, {
+    qeury: {
+      method: 'GET',
+      params: {},
+      isArray: true
+    }
+  });
+});
