@@ -1,6 +1,6 @@
 angular.module('appControllers').controller("SubmitController", 
-  ['$scope', '$window', '$location', '$upload', 'ChampionRoleService', 'ChampionService', 'SubmissionService',
-  function($scope, $window, $location, $upload, ChampionRoleService, ChampionService, SubmissionService) {
+  ['$scope', '$window', '$location', '$upload', 'SubmissionTypeService', 'ChampionRoleService', 'ChampionService', 'SubmissionService',
+  function($scope, $window, $location, $upload, SubmissionTypeService, ChampionRoleService, ChampionService, SubmissionService) {
 
     ChampionRoleService.query({}, function(championRoleService) {
       $scope.roles = championRoleService;
@@ -8,6 +8,10 @@ angular.module('appControllers').controller("SubmitController",
 
     ChampionService.query({}, function(championService) {
       $scope.champions = championService;
+    });
+
+    SubmissionTypeService.query({}, function(subtypes){
+      $scope.sub_types = subtypes;
     });
 
     $scope.postData = {
@@ -18,6 +22,12 @@ angular.module('appControllers').controller("SubmitController",
     $scope.file = {};
     $scope.file.data = "";
     $scope.missingField = false;
+    //add user id and token 
+    $scope.postData.createdBy = $window.sessionStorage.userid;
+    $scope.postData.access_token = $window.sessionStorage.token;
+
+    //if token is missing, redirect user to login page to create session 
+    console.log("user " + $scope.postData.createdBy + " and token " + $scope.postData.token);
 
     $scope.submit = function() {
       //upload file and get url 
