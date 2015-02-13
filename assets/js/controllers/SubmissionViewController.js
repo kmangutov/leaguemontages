@@ -1,6 +1,6 @@
 angular.module('appControllers').controller("SubmissionViewController", 
-  ['$scope', '$routeParams','BadgeService', 'SubmissionService', 'RatingService', 'CommentService',
-  function($scope, $routeParams, BadgeService, SubmissionService, RatingService, CommentService) {
+  ['$scope', '$routeParams','BadgeService', 'SubmissionService', 'CommentService',
+  function($scope, $routeParams, BadgeService, SubmissionService, CommentService) {
 
     //console.log("id is " + $routeParams.id);
     $scope.tagline = "submissionView";
@@ -32,20 +32,20 @@ angular.module('appControllers').controller("SubmissionViewController",
     //ratings same as badge
     $scope.ratings = 0;
 
-
     SubmissionService
         .get({id: $scope.subid})
         .$promise
         .then(function(submission){
   
             //nested population doesnt support by sails atm 
+            //therefore non-intutive way to display badge here
+
+            //rating is simple
             angular.forEach(submission.ratings, function(rating){
                 $scope.ratings += rating.value;
             });
-                
             $scope.ratings /= submission.ratings.length;
             
-            //count ratings
             //daily, monthly, weekly, 
             //any tags?
 
