@@ -25,7 +25,7 @@ module.exports = {
 	},
 
 	beforeCreate: function(values, next){
-		Badge.findOne({from:values.user, given_to:values.given_to})
+		Badge.findOne({from:values.from, given_to:values.given_to, badge_type: values.badge_type})
 			.exec(function(err, badge){
 
 			if(err)
@@ -33,12 +33,11 @@ module.exports = {
 			if(badge)
 				return next('Badge is already given to ' + values.given_to + ' by ' + values.from);
 
-			Badge_type.findOne({id:values.badge_type}).exec(function(err,type){
+			BadgeType.findOne({id:values.badge_type}).exec(function(err,type){
 				if(!type)
 					return next('Badge type is unknonw');
+				next();
 			})
-			
-			next();
 		});
 	}
 };

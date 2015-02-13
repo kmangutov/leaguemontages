@@ -25,7 +25,7 @@ module.exports = {
 	},
 
 	beforeCreate: function(values, next){
-		Rating.findOne({from:values.from, givne_to:values.given_to})
+		Rating.findOne({from:values.from, given_to:values.given_to})
 			.exec(function(err, rating){
 			if(err)
 				return next(err);
