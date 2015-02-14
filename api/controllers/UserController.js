@@ -19,12 +19,13 @@ module.exports = require('waterlock').actions.user({
 
         User.create({display_name:displayName}).exec(function(err, user){
             if(err)
-                return res.json(500, {"error":err, "message":"cannot create user"});
+                return res.json(400, {"error":err, "message":"cannot create user"});
 
             Auth.create({email:email, password:password, user:user.id}).exec(function(err, auth){
-                if(err)
-                    return res.json(500, {"error":err, "message":"cannot create auth for user", });
-                
+                if(err){
+                    User.destroy({display_name:displayName}).exec(function(err){});
+                    return res.json(400, {"error":err, "message":"cannot create auth for user", });
+                }
                 User.update({id:user.id}, {auth:auth.id}).exec(function(){});
                 return res.json(200, {"status":"successfully created user account"});
             });

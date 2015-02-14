@@ -8,24 +8,29 @@
           </button>
           <h4 class="modal-title">Sign up</h4>
         </div>
+        <form id="register">
         <div class="modal-body">
           <div class="form-group">
             <label for="email" class="sr-only">Email</label>
             <input type="email" name="email" ng-model="formData.email" class="form-control" placeholder="somebody@example.com">
+            <span ng-show="!isFilled.email" style="color:red;">{{ errors.email }}</span>
           </div>
           <div class="form-group">
-            <label for="name" class="sr-only">Display Name</label>
-            <input type="text" name="username" ng-model="formData.name" class="form-control" placeholder="pick your display name">
+            <label for="display_name" class="sr-only">Display Name</label>
+            <input type="text" name="display_name" ng-model="formData.display_name" class="form-control" placeholder="pick your display name">
+            <span ng-show="!isFilled.display_name" style="color:red;">{{ errors.display_name }}</span>
           </div>
           <div class="form-group">
             <label for="key" class="sr-only">Password</label>
             <input type="password" name="key" ng-model="formData.password" class="form-control" placeholder="Password">
+            <span ng-show="!isFilled.password" style="color:red;">{{ errors.password }}</span>
           </div>
         </div>
-        <p id="rg_error" ng-show="hasFailed">{{ result }}</p>
+        <!-- <p id="rg_error" style="color:red;" ng-show="hasFailed">{{ result }}</p> -->
         <div class="modal-footer">
           <button id="btn-register" class="btn btn-custom btn-lg btn-block" ng-click="register()">Register</button>
         </div>
+        </form>
       </div> <!-- /.modal-content -->
     </div> <!-- /.modal-dialog -->
   </div> <!-- /.modal -->
