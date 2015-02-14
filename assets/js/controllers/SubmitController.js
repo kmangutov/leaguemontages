@@ -2,6 +2,8 @@ angular.module('appControllers').controller("SubmitController",
   ['$scope', '$window', '$location', '$upload', 'SubmissionTypeService', 'ChampionRoleService', 'ChampionService', 'SubmissionService',
   function($scope, $window, $location, $upload, SubmissionTypeService, ChampionRoleService, ChampionService, SubmissionService) {
 
+    $scope.tagline = "submitView";
+
     ChampionRoleService.query({}, function(championRoleService) {
       $scope.roles = championRoleService;
     });

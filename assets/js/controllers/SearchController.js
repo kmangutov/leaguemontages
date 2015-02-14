@@ -2,6 +2,8 @@ angular.module('appControllers').controller("SearchController",
   ['$scope', 'ChampionRoleService', 'ChampionService', 'BadgeTypeService', 'SubmissionService',
   function($scope, ChampionRoleService, ChampionService, BadgeTypeService, SubmissionService) {
 
+    $scope.tagline = "searchView";
+
     ChampionService.query({}, function(championService) {
       $scope.champions = championService;
     });

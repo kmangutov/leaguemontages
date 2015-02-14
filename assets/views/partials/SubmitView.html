@@ -1,43 +1,60 @@
 
-<form ng-submit="submit()">
-<ul>
-  <li>Title:<input type="text" name="title" ng-model="postData.title"></li>
-  <li>Description:<input type="text" name="desc" ng-model="postData.description"></li>
-  <li>
-    <!-- upload file -->
-    <div class="btn btn-default" 
-         type="file" name="uploadFile" ng-file-select ng-model="file.data">select</div>
-    <p> {{ file.data[0].name }} </p>
-    <p ng-show="missingField">You have to choose video.. </p>
-  </li>
-  
-  <li>
-    <select ng-model="postData.champ_type" 
-            ng-options="champion.id as champion.name for champion in champions">
-    </select>
-  </li>
+<form ng-submit="submit()" role="form">
 
-  <li>
-    <select ng-model="postData.champ_role"
-            ng-options="role.id as role.name for role in roles">
-    </select>
-  </li>
 
-  <li>
-    <select ng-model="postData.sub_type"
-            ng-options="sub_type.id as sub_type.name for sub_type in sub_types">
-    </select>
-  </li>
 
-  <li><button type="submit">Create</button></li>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6">
 
-</ul>
-</form>
+      <div class="form-group">
+        <label for="inputTitle">Title</label>
+        <input type="text" placeholder="Title" id="inputTitle" name="title" class="form-control" ng-model="postData.title">
+      </div>
 
-<!-- <img ng-show="postData.url" ng-src="{{ postData.url }}" width=400 height=300 /> -->
-<!--
-<form id="uploadForm" enctype="multipart/form-data" action="/api/v1.0/upload" method="POST">
-    <input type="file" name="uploadFile" />
-    <input type="submit" value="upload"/>
-</form>
--->
+      <div class="form-group">
+        <label for="inputDesc">Description</label>
+        <textarea placeholder="Description" id="inputDesc" name="desc" class="form-control" ng-model="postData.description" />
+      </div>
+
+      <div class="form-group">
+        <label for="inputChamp">Champion</label>
+        <select ng-model="postData.champ_type" class="form-control" id="inputChamp" ng-options="champion.id as champion.name for champion in champions">
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="inputRole">Role</label>
+        <select ng-model="postData.champ_role" id="inputRole" class="form-control" ng-options="role.id as role.name for role in roles">
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="inputType">Type</label>
+        <select ng-model="postData.sub_type" id="inputType" class="form-control" ng-options="sub_type.id as sub_type.name for sub_type in sub_types">
+        </select>
+      </div>
+
+    </div>
+
+
+    <div class="col-lg-6">
+      <label for="drop-zone">Submission</label>
+      <div class="upload-drop-zone" id="drop-zone">
+        Drag and drop here
+      </div>
+
+      <span class="help-block">
+        <div class="btn btn-link" 
+             type="file" name="uploadFile" ng-file-select ng-model="file.data">Or select a file</div>
+        <p> {{ file.data[0].name }} </p>
+        <p ng-show="missingField">You must choose a video</p>
+
+      </span>
+
+      <button type="submit" class="btn btn-default form-control element-bottom">Create</button>
+
+    </div>
+  </div>
+</div>
