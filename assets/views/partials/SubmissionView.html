@@ -6,15 +6,15 @@
 
     <div class="sub_misc">
         <!-- TODO: badge, rating, view counts, etc -->
-        <table>
-            <tr ng-repeat="(badgeType, count) in badges">
-                <td>{{ badgeType }}</td>
-                <td>{{ count }}</td>
-            </tr>
-        </table>
+       
+        <ul>
+            <li ng-repeat="(badge, count) in badges" style="display:inline; margin:20px;">
+                <div class="btn btn-default" ng-click="addBadge(badge)">{{badge}}</div>{{ count }}
+            </li>
+        </ul>
         <br/>
         <p>Ratings: {{ ratings }} </p>
-        <p>Views: {{ viewCount }} </p>
+        <p>Views: {{ views }} </p>
     </div>
     <div class="sub_body">
         created at : {{ subData.createdAt | date:'MM/dd/yyyy @ h:mma'}} <br/>
