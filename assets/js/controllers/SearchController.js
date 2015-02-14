@@ -36,7 +36,7 @@ angular.module('appControllers').controller("SearchController",
 
       console.log("GET " + JSON.stringify(query));
 
-      SubmissionService.query(query, function(response){
+      SubmissionService.get.query(query, function(response){
         $scope.submissions = response;
         $scope.showResult = true;
         if(response.length != 0)
