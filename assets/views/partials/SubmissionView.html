@@ -1,4 +1,8 @@
 <div class="submissionView">
+    <div class="alert alert-warning" ng-show="!isAccessible">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Warning!</strong> You need to login in order to award badge(s).
+    </div>
     <!-- display all infomation about a particular submission -->
     <div class="sub_title">
         {{ subData.title }}
@@ -9,7 +13,7 @@
        
         <ul>
             <li ng-repeat="(badge, count) in badges" style="display:inline; margin:20px;">
-                <div class="btn btn-default" ng-click="addBadge(badge)">{{badge}}</div>{{ count }}
+                <div class="btn btn-default" ng-click="badgeHandler(badge)">{{badge}}</div>{{ count }}
             </li>
         </ul>
         <br/>
@@ -34,6 +38,8 @@
         <!-- TODO: social integration -->
         <div class="comments list">
             <p> Comments </p>
+             <textarea ng-model="comment" rows="8" cols="50" class="input-no-width rounded shaded left clearboth" id="msg" required></textarea>
+            <div class="btn btn-default" id="comment_apply" ng-click="submitComment()"></div>
             <table class="comment table">
             <!-- TODO: test with mysql, iterate over comments -->
                  <tr ng-repeat="comment in comments">

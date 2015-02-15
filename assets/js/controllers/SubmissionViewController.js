@@ -1,11 +1,12 @@
 angular.module('appControllers').controller("SubmissionViewController", 
-  ['$scope','$window', '$routeParams','BadgeTypeService', 'BadgeService', 'SubmissionService', 'CommentService',
-  function($scope, $window, $routeParams, BadgeTypeService, BadgeService, SubmissionService, CommentService) {
+  ['$scope','$window','$timeout', '$routeParams','UtilService', 'BadgeTypeService', 'BadgeService', 'SubmissionService', 'CommentService',
+  function($scope, $window, $timeout, $routeParams, UtilService, BadgeTypeService, BadgeService, SubmissionService, CommentService) {
 
     //console.log("id is " + $routeParams.id);
     $scope.tagline = "submissionView";
     $scope.subid = $routeParams.id;
     $scope.error = null;
+    $scope.isAccessible = true;
 
     CommentService.query({written_to: $scope.subid}, function(comments){
         $scope.comments = comments;
@@ -70,7 +71,7 @@ angular.module('appControllers').controller("SubmissionViewController",
             $scope.error = errResponse;
         });
 
-    $scope.addBadge = function(badgeName) {
+    $scope.badgeHandler = function(badgeName) {
         var postData = {};
         postData.given_to = $scope.subid;
         postData.from = $window.sessionStorage.userid; 
@@ -78,7 +79,13 @@ angular.module('appControllers').controller("SubmissionViewController",
         
         if(postData.from == null) //no login handle it
         {
-            //pop up and let user choose redirect to login page or stay
+            $scope.isAccessible = false;
+            $scope.timeout = UtilService.displayWithSecond({time:3}).then(function(){
+                //after timeout was executed, reset or do whatever
+                $scope.isAccessible = true;
+                //clean up used timeout promise
+                $timeout.cancel($scope.timeout);
+            });
             return;
         }
 
@@ -95,5 +102,10 @@ angular.module('appControllers').controller("SubmissionViewController",
         });
         console.log("Badge added " + badgeName + " and id " + $scope.badgeTypeMap[badgeName]);        
     };
+
+    $scope.$on("destroy", function(event){
+      $timeout.cancel($scope.timeout);
+    })
+
     
 }]);

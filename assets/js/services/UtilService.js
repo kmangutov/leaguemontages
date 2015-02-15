@@ -34,5 +34,17 @@ services.factory('UtilService', function($http, $interval, $timeout, $window){
     return timeout;
   };
 
+  utils.displayWithSecond = function(args){
+    var promise = $interval(function(){
+      args.time -= 1;
+    }, 1000);
+
+    var timeout = $timeout(function(){
+      $interval.cancel(promise);
+    }, args.time * 1000);
+
+    return timeout;
+  };
+
   return utils;
 });

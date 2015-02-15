@@ -19,7 +19,9 @@ angular.module('appControllers').controller("SubmitController",
     $scope.warning.time = 5; //sec
 
     if($window.sessionStorage.token === undefined){
-      $scope.timeout = UtilService.redirectWithSecond($scope.warning);
+      $scope.timeout = UtilService.redirectWithSecond($scope.warning).then(function(){
+        $timeout.cancel($scope.timeout);
+      });
     } else {
       $scope.isLogged = true;
       console.log("setting logged is true");
