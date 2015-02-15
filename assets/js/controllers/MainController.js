@@ -17,11 +17,11 @@ controller.controller('MainController', ['$scope', '$http', '$window', '$locatio
         $scope.userinfo = $window.sessionStorage.userinfo;
         $scope.token = $window.sessionStorage.token;
         $scope.isLogged = false;
-        if($scope.token != null)
+        if($scope.token !== undefined && $scope.username !== undefined)
             $scope.isLogged = true;
-
+        
         console.log("Main controller start.");
         console.log(JSON.stringify($window.sessionStorage.username));
         console.log($scope.token);
-
+3
 }]);

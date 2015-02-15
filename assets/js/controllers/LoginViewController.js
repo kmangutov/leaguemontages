@@ -12,7 +12,7 @@ angular.module('appControllers').controller('LoginViewController',
                         "tokenError": "cannot retrieve token",
                         "signupError": "Email or name is already in used"};
 
-    $window.sessionStorage.token = null;
+    //$window.sessionStorage.token = null;
 
     $scope.login = function() {
 
