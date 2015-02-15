@@ -14,11 +14,13 @@ services.factory('UtilService', function($http, $interval, $timeout, $window){
   /**
    * @params: args object contains url and time left
    * {url: redirect url, time: sec}
+   * 
+   * in addition, don't forget to clean up timeout after it is used
+   * by calling timeout.cancel(timeoutVariable) where variable is the
+   * promise that has been returned from this method
    */
   utils.redirectWithSecond = function(args){
-    console.log("in redirect service");
-    console.log(JSON.stringify(args));
-    var max = args.time;
+    
     var promise = $interval(function(){
       args.time -= 1;
       console.log(args.time);
@@ -31,7 +33,6 @@ services.factory('UtilService', function($http, $interval, $timeout, $window){
 
     return timeout;
   };
-
 
   return utils;
 });
