@@ -1,9 +1,31 @@
 angular.module('appControllers').controller("SubmitController", 
-  ['$scope', '$window', '$location', '$upload', 'SubmissionTypeService', 'ChampionRoleService', 'ChampionService', 'SubmissionService',
-  function($scope, $window, $location, $upload, SubmissionTypeService, ChampionRoleService, ChampionService, SubmissionService) {
+  ['$scope', '$window','$timeout', '$location', '$upload','UtilService', 'SubmissionTypeService', 'ChampionRoleService', 'ChampionService', 'SubmissionService',
+  function($scope, $window, $timeout, $location, $upload, UtilService, SubmissionTypeService, ChampionRoleService, ChampionService, SubmissionService) {
 
     $scope.tagline = "submitView";
 
+    $scope.file = {};
+    $scope.file.data = "";
+    $scope.missingField = false;
+    $scope.isLogged = false;
+
+    //validation if there is no logged in user
+    //notify and redirect to home 
+    console.log("token - " + $window.sessionStorage.token);
+    console.log(typeof $window.sessionStorage.token);
+    
+    $scope.warning = {};
+    $scope.warning.url = 'http://localhost:1337/kirill#/login';
+    $scope.warning.time = 5; //sec
+
+    if($window.sessionStorage.token === undefined){
+      $scope.timeout = UtilService.redirectWithSecond($scope.warning);
+    } else {
+      $scope.isLogged = true;
+      console.log("setting logged is true");
+    }
+
+    //init form data
     ChampionRoleService.query({}, function(championRoleService) {
       $scope.roles = championRoleService;
     });
@@ -21,9 +43,6 @@ angular.module('appControllers').controller("SubmitController",
       champ_role: 1
     };
 
-    $scope.file = {};
-    $scope.file.data = "";
-    $scope.missingField = false;
     //add user id and token 
     $scope.postData.createdBy = $window.sessionStorage.userid;
     $scope.postData.access_token = $window.sessionStorage.token;
@@ -64,7 +83,7 @@ angular.module('appControllers').controller("SubmitController",
                 .then(function(res){
                     console.log(res.id);
                     //redirect user to submission view
-                    window.location.href = 'http://localhost:1337/kirill#/submission/' + res.id;
+                    $window.location.href = 'http://localhost:1337/kirill#/submission/' + res.id;
           });   
         });
       }
@@ -72,5 +91,11 @@ angular.module('appControllers').controller("SubmitController",
         $scope.missingField = true;
       }
     }
+
+    //clean up on view destroy
+    $scope.$on("destroy", function(event) {
+      console.log("Clean up timeout variable");
+      $timeout.cancel($scope.timeout);
+    });
 }]);
 
