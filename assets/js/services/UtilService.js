@@ -17,7 +17,8 @@ services.factory('UtilService', function($http, $interval, $timeout, $window){
    * 
    * in addition, don't forget to clean up timeout after it is used
    * by calling timeout.cancel(timeoutVariable) where variable is the
-   * promise that has been returned from this method
+   * promise that has been returned from this method. 
+   * OR maybe we can just clean it up in here.. 
    */
   utils.redirectWithSecond = function(args){
     
