@@ -55,6 +55,9 @@ angular.module('appControllers').controller("SubmitController",
     $scope.submit = function() {
       //upload file and get url 
       
+      //TODO: before creation of submission, we might want to
+      //validate user input to prevent XSS or other attakcs that
+      //user may cause to harm the server or other users 
       if ($scope.file.data[0]){
         $scope.missingField = false;
 
