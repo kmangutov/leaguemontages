@@ -13,18 +13,19 @@ angular.module('appControllers').controller("SubmissionViewController",
         console.log($scope.comments);
     });
 
+    $scope.badgeTypeMap = {};
+    $scope.badges = {};
     //calculate number of badges 
     //this can be done either frontend or backend
     //ideally this supposed to go to backend or service to reuse anywhere we want
     $scope.updateBadges = function() {
-        $scope.badges = {};
-        $scope.badgeTypeMap = {};
-
         console.log("updating badges");
+
         BadgeService.counts($scope.subid)
             .then(function(data){
                 $scope.badges = data.badges;
-                $scope.badgeTypeMap = data.map;
+  
+                console.log($scope.badgeTypeMap);
             }, function(data){
                 //error handler
                 console.log("Badge service error");
@@ -34,6 +35,16 @@ angular.module('appControllers').controller("SubmissionViewController",
     };
 
     $scope.updateBadges();
+
+    BadgeTypeService.query({}, function(badgetypes) {
+        angular.forEach(badgetypes, function(badgetype){
+            $scope.badgeTypeMap[badgetype.name] = badgetype.id;
+            if(!(badgetype.name in $scope.badges))
+                $scope.badges[badgetype.name] = 0;
+        });
+        
+    });
+
     //ratings same as badge
     $scope.ratings = 0;
 
@@ -71,6 +82,8 @@ angular.module('appControllers').controller("SubmissionViewController",
             $scope.error = errResponse;
         });
 
+    //comments 
+    //CommentService.query({written_to: $scope.subid})
     $scope.badgeHandler = function(badgeName) {
         var postData = {};
         postData.given_to = $scope.subid;

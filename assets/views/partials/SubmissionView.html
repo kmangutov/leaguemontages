@@ -12,8 +12,8 @@
         <!-- TODO: badge, rating, view counts, etc -->
        
         <ul>
-            <li ng-repeat="(badge, count) in badges" style="display:inline; margin:20px;">
-                <div class="btn btn-default" ng-click="badgeHandler(badge)">{{badge}}</div>{{ count }}
+            <li ng-repeat="(badge, id) in badgeTypeMap" style="display:inline; margin:20px;">
+                <div class="btn btn-default" ng-click="badgeHandler(badge)">{{badge}}</div>{{badges[badge]}}
             </li>
         </ul>
         <br/>
@@ -42,7 +42,7 @@
             <div class="btn btn-default" id="comment_apply" ng-click="submitComment()"></div>
             <table class="comment table">
             <!-- TODO: test with mysql, iterate over comments -->
-                 <tr ng-repeat="comment in comments">
+                <tr ng-repeat="comment in comments | orderBy: '-createdAt'">
                     <td> {{ comment.written_by.display_name }} </td>
                     <td> {{ comment.createdAt | date:'MM/dd/yyyy @ h:mma'}} </td>
                     <td> {{ comment.text }} </td>
