@@ -1,15 +1,20 @@
 module.exports = {
     get: function(req, res) {
-        var id = req.param('id');
-
-        Comment.findOne({id:id}).exec(function(err, comment){
+        var id = req.param('written_to');
+        sails.log("custom get with id " + id);
+        /*
+        var q = 'SELECT User.display_name, Comment.* FROM Comment ' + 
+                'LEFT JOIN USER ON Comment.written_to=' + id + ' AND Comment.written_by=user.id' + 
+                ' ORDER BY IF(parentId = 0, Comment.id, parentId), parentId!=0, Comment.id ASC';
+        */
+        Comment.query(q, function(err, comments){
             if(err)
-                return res.json(404, {error:"db error found"});
-            if(!comment)
-                return res.json(403, {error:"not found"});
+                return res.json(400, {error:"db error found" + err});
+            if(!comments)
+                return res.json(404, {error:"not found"});
 
-            return res.json(200, comment);
-        })
+            return res.json(200, comments);
+        });
 
         /*
              SELECT * 

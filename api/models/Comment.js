@@ -24,17 +24,19 @@
         //this field is not null if reply
         //otherwise null
         parentId: {
-            model: 'Comment'
+            model: 'Comment',
+            defaultsTo: 0
         },
 
         text: {
             type: 'text',
             required: true
         },
-
+        /*
         media: {
             model: 'Media'
         }
+        */
     },
 
     beforeCreate: function(values, next){
