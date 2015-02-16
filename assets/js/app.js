@@ -7,6 +7,11 @@ var app = angular.module("app", [
 app.config(['$routeProvider', function($routeProvider) {
 
   $routeProvider
+    .when('/', {
+      templateUrl: 'views/index.html',
+      controller: 'MainController'
+    })
+
     .when('/submit', {
       templateUrl: 'views/partials/SubmitView.html',
       controller: 'SubmitController'
@@ -28,7 +33,6 @@ app.config(['$routeProvider', function($routeProvider) {
     })
 
     .otherwise({
-      templateUrl: 'views/index.html',
-      controller: 'MainController'
+      templateUrl: 'views/404.html',
     });
 }]);

@@ -47,13 +47,9 @@ module.exports.routes = {
   '/api/v1.0/upload':{
     controller: 'UploadController',
     action: 'upload'
-  }
-
-  /*'GET /api/v1.0/comment/:id':{
-    controller: 'CommentController',
-    action: 'get'
-  }*/
-
+  },
+  
+  
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
