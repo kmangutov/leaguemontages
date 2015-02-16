@@ -1,6 +1,6 @@
 
 var adminApp = angular.module('leagueAdmin',
-  ['ngRoute', 'appRoutes', 'AdminCtrl', 'ng-admin']);
+  ['ng-admin']);
 
 adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Field, Reference, ReferencedList, ReferenceMany, RestangularProvider) {
     
@@ -287,9 +287,9 @@ adminApp.config(function (NgAdminConfigurationProvider, Application, Entity, Fie
             new Reference('parentId').label('reply to')
                 .targetEntity(comment)
                 .targetField(new Field('id')),
-            new Reference('media').label('Media')
-                .targetEntity(media)
-                .targetField(new Field('media_url'))
+            //new Reference('media').label('Media')
+            //    .targetEntity(media)
+            //    .targetField(new Field('media_url'))
         ]);
 
     //////////////////////////////////////////////////////////////////////
