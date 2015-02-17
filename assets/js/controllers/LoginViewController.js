@@ -71,6 +71,7 @@ angular.module('appControllers').controller('LoginViewController',
         //call /user/register
 
         //validation
+        console.log($scope.formData);
         if($scope.formData.display_name == ""){
             $scope.isFilled.display_name = false;
             $scope.errors.display_name = "Required";

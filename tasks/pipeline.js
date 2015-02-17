@@ -41,16 +41,18 @@ var jsFilesToInject = [
   'libs/ngDialog/js/ngDialog.js',
   'libs/ng-file-upload/angular-file-upload.js',
   'libs/ng-file-upload/angular-file-upload-shim.js',
-
+  
   'js/app.js',
   'js/adminApp.js',
   'js/AppServices.js',
   'js/AppControllers.js',
+  'js/AppDirectives.js',
   'js/appRoutes.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
   'js/controllers/*.js',
+  'js/directives/*.js',
   'js/services/*.js'
 ];
 
