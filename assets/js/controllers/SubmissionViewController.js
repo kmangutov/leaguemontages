@@ -1,6 +1,6 @@
 angular.module('appControllers').controller("SubmissionViewController", 
-  ['$scope','$window','$timeout', '$routeParams','UtilService', 'BadgeTypeService', 'BadgeService', 'SubmissionService', 'CommentService',
-  function($scope, $window, $timeout, $routeParams, UtilService, BadgeTypeService, BadgeService, SubmissionService, CommentService) {
+  ['$scope','$window','$timeout', '$routeParams','AuthService', 'UtilService', 'BadgeTypeService', 'BadgeService', 'SubmissionService', 'CommentService',
+  function($scope, $window, $timeout, $routeParams, AuthService, UtilService, BadgeTypeService, BadgeService, SubmissionService, CommentService) {
 
     //console.log("id is " + $routeParams.id);
     $scope.tagline = "submissionView";
@@ -84,13 +84,8 @@ angular.module('appControllers').controller("SubmissionViewController",
 
     //comments 
     //CommentService.query({written_to: $scope.subid})
-    $scope.badgeHandler = function(badgeName) {
-        var postData = {};
-        postData.given_to = $scope.subid;
-        postData.from = $window.sessionStorage.userid; 
-        postData.badge_type = $scope.badgeTypeMap[badgeName];
-        
-        if(postData.from == null) //no login handle it
+    $scope.handleNonUser = function() {
+        if(!AuthService.logState().isLogged) //no login handle it
         {
             $scope.isAccessible = false;
             $scope.timeout = UtilService.displayWithSecond({time:3}).then(function(){
@@ -99,9 +94,20 @@ angular.module('appControllers').controller("SubmissionViewController",
                 //clean up used timeout promise
                 $timeout.cancel($scope.timeout);
             });
-            return;
+            return false;
         }
+        return true;
+    };
 
+    $scope.badgeHandler = function(badgeName) {
+        if(!$scope.handleNonUser())
+            return;
+
+        var postData = {};
+        postData.given_to = $scope.subid;
+        postData.from = $window.sessionStorage.userid; 
+        postData.badge_type = $scope.badgeTypeMap[badgeName];
+        
         var badge = new BadgeService.get(postData);
         
         console.log(badge.$promise);
@@ -114,6 +120,26 @@ angular.module('appControllers').controller("SubmissionViewController",
             console.log("ccannot add badge");
         });
         console.log("Badge added " + badgeName + " and id " + $scope.badgeTypeMap[badgeName]);        
+    };
+
+    $scope.newComment = "";
+    $scope.submitComment = function() {
+        if(!$scope.handleNonUser())
+            return;
+
+        console.log("adding new comment");
+        var postData = {};
+        postData.written_to = $scope.subid;
+        postData.written_by = $window.sessionStorage.userid;
+        postData.text = $scope.newComment;
+
+        var comment = new CommentService(postData);
+        comment.$save().then(function(data){
+            $scope.comments.push(data);
+            console.log(data);
+        }, function(errData){
+            console.log("cannot add comment");
+        });
     };
 
     $scope.$on("destroy", function(event){

@@ -45,20 +45,20 @@ services.factory('BadgeService',
                 var badgeTypeMap = {};
                 
                 angular.forEach(res.data, function(badge){
-                var key = badge.badge_type.name;
+                  var key = badge.badge_type.name;
 
-                if(!(key in badges)){
+                  if(!(key in badges)){
                     badges[key] = 1;
                     badgeTypeMap[key] = badge.badge_type.id;
-                }
-                else
+                  }
+                  else
                     badges[key] += 1;
                 });
                 console.log("service " + JSON.stringify(badges));
 
                 return {badges: badges, map:badgeTypeMap};
               }, function(res){ //error
-                 return {status: res.status, data: res.data};
+                return {status: res.status, data: res.data};
               });
 
     return promise;
