@@ -1,7 +1,23 @@
 var services = angular.module('appServices');
 
-services.factory('AuthService', ['$http', function($http){
+services.service('AuthService', ['$http', '$window', '$rootScope', 
+                function($http, $window, $rootScope){
     var authobj = {};
+    var logState = {isLogged: false};
+
+    $rootScope.$watch(function(){
+        return $window.sessionStorage.logState;
+    }, function callback(newVal, oldVal){
+        if(newVal == "true")
+            logState.isLogged = true;
+        else
+            logState.isLogged = false;
+        console.log("SERV STATE " + logState.isLogged);
+    });
+
+    authobj.logState = function(){
+        return logState;
+    };
 
     authobj.getToken = function (){
         return $http.get('/api/v1.0/user/jwt');

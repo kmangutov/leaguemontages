@@ -1,9 +1,13 @@
-<div ng-show="isLogged"> 
+<div ng-show="logState.isLogged"> 
     MAIN VIEW With user login.. 
     <br/>
     <hr>
     <div id="welcome_message">
-        <p> Welcome "{{ username }}" !! </p>
+        <p> Welcome "{{ userinfo.username }}" !! </p>
     </div>
+
+    <!-- feedview if follow any -->
+    <!-- ondemand view weekly/mothly/badges -->
+    
 </div>
-<p ng-show="!isLogged"> Main view without user login.. </p>
+<p ng-show="!logState.isLogged"> Main view without user login.. </p>

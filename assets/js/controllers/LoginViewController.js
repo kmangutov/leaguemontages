@@ -29,8 +29,10 @@ angular.module('appControllers').controller('LoginViewController',
                         //keep least amount of info to pass it along with other controller 
                         $window.sessionStorage.token = data.token;
                         $window.sessionStorage.username = loginData.display_name;
+                        $window.sessionStorage.logState = true;
                         console.log($window.sessionStorage.username)
                         $scope.hasFailed = false;
+                        //set login state as true
                         $location.url('/'); //go to main view  
                     })
                     .error(function(data){
