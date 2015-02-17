@@ -83,7 +83,7 @@ angular.module('appControllers').controller("SubmitController",
           var stringData = JSON.stringify($scope.postData);
           console.log("PUT " + stringData); 
 
-          var submission = new SubmissionService.get($scope.postData);
+          var submission = new SubmissionService($scope.postData);
           submission.$save()
                 .then(function(res){
                     console.log(res.id);
