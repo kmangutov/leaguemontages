@@ -3,17 +3,22 @@ var services = angular.module('appServices');
 services.service('AuthService', ['$http', '$window', '$rootScope', 
                 function($http, $window, $rootScope){
     var authobj = {};
-    var logState = {isLogged: false};
+    var logState = {isLogged: false, username: "", userid: 0};
 
     $rootScope.$watch(function(){
         return $window.sessionStorage.logState;
     }, function callback(newVal, oldVal){
-        if(newVal == "true")
+        if(newVal == "true"){
             logState.isLogged = true;
+            logState.username = $window.sessionStorage.username;
+            logState.userid = $window.sessionStorage.userid;
+            logState.token = $window.sessionStorage.token;
+        }
         else
             logState.isLogged = false;
         console.log("SERV STATE " + logState.isLogged);
     });
+
 
     authobj.logState = function(){
         return logState;
