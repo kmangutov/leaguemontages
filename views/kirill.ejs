@@ -1,6 +1,6 @@
-<div ng-app="app" id="content">
+<div ng-app="app" id="content" ng-controller="MainController">
 
-
+<header>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -12,13 +12,16 @@
     <ul class="nav navbar-nav navbar-right">
       <li><a href="/kirill#/">Home</a></li>
       <li><a href="/kirill#/search">Browse</a></li>
-      <li><a ng-show="isLogged" href="/kirill#/submit">Upload</a></li>
+      <li><a ng-show="logState.isLogged" href="/kirill#/submit">Upload</a></li>
+      <li><a ng-show="logState.isLogged" href="#" ng-click="logout()">Logout</a></li>
+      <li><a ng-show="!logState.isLogged" href="/kirill#/login">Login</a></li>
     </ul>
 
     </div>
 
   </div>
 </nav>
+</header>
 
 <div ng-view></div>
 
