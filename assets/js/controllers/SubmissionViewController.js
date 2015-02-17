@@ -7,7 +7,9 @@ angular.module('appControllers').controller("SubmissionViewController",
     $scope.subid = $routeParams.id;
     $scope.error = null;
     $scope.isAccessible = true;
-
+    $scope.logState = AuthService.logState();
+    console.log("subview created");
+    console.log($scope.logState);
     CommentService.query({written_to: $scope.subid}, function(comments){
         $scope.comments = comments;
         console.log($scope.comments);
@@ -48,7 +50,7 @@ angular.module('appControllers').controller("SubmissionViewController",
     //ratings same as badge
     $scope.ratings = 0;
 
-    SubmissionService.get
+    SubmissionService
         .get({id: $scope.subid})
         .$promise
         .then(function(submission){
@@ -72,11 +74,12 @@ angular.module('appControllers').controller("SubmissionViewController",
             $scope.championRole = submission.champ_role;
             $scope.subType = submission.sub_type;
             $scope.state = submission.state.state;
-            $scope.views = submission.view;
+            $scope.views = submission.view + 1;
             
             //get counter up for viewCounter and model itself
-            submission.view.value += 1;
-            SubmissionService.update.query({id:$scope.subid, count: $scope.views + 1});
+            //submission.view.value += 1;
+            SubmissionService.update({id:$scope.subid, view: $scope.views});
+         
 
         }, function(errResponse) {
             $scope.error = errResponse;
@@ -135,11 +138,44 @@ angular.module('appControllers').controller("SubmissionViewController",
 
         var comment = new CommentService(postData);
         comment.$save().then(function(data){
+            data.written_by = {display_name:AuthService.logState().username};
             $scope.comments.push(data);
             console.log(data);
         }, function(errData){
             console.log("cannot add comment");
         });
+        $scope.newComment = "";g
+    };
+
+    $scope.deleteComment = function(comment){
+        console.log("Deleting comment id " + comment);
+        //validate owner first
+        if(comment.written_by.display_name != $scope.logState.username)
+        {
+            console.log("Cannot delete other comment");
+            return;
+        }
+
+        CommentService.delete({}, {id:comment.id});
+        //some animation?
+        var index = $scope.comments.indexOf(comment);
+        $scope.comments.splice(index, 1);
+    };
+
+    $scope.editing = 0;
+    $scope.editable = "";
+    $scope.editComment = function(comment){
+        console.log("Editing comment id " + comment);
+        $scope.editable = comment.text;
+        $scope.editing = comment.id;
+    };
+
+    $scope.editDone = function(comment){
+        $scope.editing = false;
+        if($scope.editable != comment.text){
+            CommentService.update({id:comment.id, text:comment.text});
+        }
+        $scope.editable = "";
     };
 
     $scope.$on("destroy", function(event){

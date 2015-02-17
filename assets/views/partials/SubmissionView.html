@@ -45,7 +45,22 @@
                 <tr ng-repeat="comment in comments | orderBy: '+createdAt'">
                     <td> {{ comment.written_by.display_name }} </td>
                     <td> {{ comment.createdAt | date:'MM/dd/yyyy @ h:mma'}} </td>
-                    <td> {{ comment.text }} </td>
+                    <td> 
+                        <div ng-show="editing==comment.id">
+                            <textarea ng-model="comment.text" rows="2" cols="50" class="input-no-width rounded shaded left clearboth" id="msg"></textarea>
+                        </div>
+                        <div ng-show="!(editing==comment.id)">{{ comment.text }}</div> 
+                    </td>
+                    <td>
+                        <div ng-show="comment.written_by.display_name==logState.username" 
+                        class="btn btn-default" ng-click="deleteComment(comment)">delete</div>
+                    </td>
+                    <td>
+                        <div ng-show="comment.written_by.display_name==logState.username">
+                        <div ng-show="!(editing==comment.id)" class="btn btn-default" ng-click="editComment(comment)">edit</div>
+                        <div ng-show="editing==comment.id" class="btn btn-default" ng-click="editDone(comment)">Done</div>
+                        </div>
+                    </td>
                  </tr>
             </table>
         </div>
