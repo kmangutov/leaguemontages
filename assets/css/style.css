@@ -97,3 +97,20 @@ html {
 .btn-custom:focus {
   color: #fff;
 }
+
+/*
+  Search view 
+*/
+
+#search-option li {
+  display: inline;
+  padding-right: 5px;
+}
+
+#result tr td {
+  padding:0 15px 0 15px;
+}
+
+#result tr td ul {
+  padding: 0px;
+}
