@@ -47,5 +47,16 @@ services.factory('UtilService', function($http, $interval, $timeout, $window){
     return timeout;
   };
 
+  utils.getRatings = function(ratings){
+    var totalRating = 0;
+    if(ratings.length != 0){
+      angular.forEach(ratings, function(rating){
+        totalRating += rating.value;
+      });
+      totalRating /= ratings.length;
+    }
+    return totalRating;
+  };
+
   return utils;
 });
