@@ -1,17 +1,17 @@
 <div class="searchField">
     <form ng-submit="submit()">
-        <ul>
-
+        <ul id="search-option">
             <li>Search: <input type="text" name="keyword" ng-model="keyword" ng-init="keyword=''"></li>
-            <li><button type="submit">Search</button></li>
             <li>
                 <select ng-model="getData.champ_type" 
-                    ng-options="champion.id as champion.name for champion in champions">            
+                    ng-options="champion.id as champion.name for champion in champions"> 
+                    <option value=''> -- </option>           
                 </select>
             </li>
             <li>
                 <select ng-model="getData.champ_role"
                     ng-options="role.id as role.name for role in roles">
+                    <option value=''> -- </option>
                 </select>
             </li>
             <li>
@@ -20,9 +20,11 @@
             <li>
                 <select ng-model="getData.badgeType"
                     ng-options="badgeType.id as badgeType.name for badgeType in badgeTypes">
+                    <option value=''> -- </option>
                 </select>
                 <!-- TODO: order by badges -->
             </li>
+            <li><button type="submit">Search</button></li>
 
             <li>
                 <!-- order by rating --> 
@@ -40,14 +42,27 @@
     </div>
 
     <div ng-show="hasData">
-        <table>
-            <tr ng-repeat="submission in submissions">
+        <table id="result">
+            <tr id="result-header">
+                <td> Title </td>
+                <td> Vid url </td>
+                <td> Uploaded by </td>
+                <td> Ratings </td>
+                <td> Badges </td>
+            </tr>
+            <tr ng-repeat="submission in submissions" style="padding-right:10px;">
                 <!-- TODO: show necessary information about submission --> 
-                <td> {{ submission.title }} </td>
+                <td> <a href="{{submission.link}}">{{ submission.title }}</a></td>
                 <td> {{ submission.url }} </td>
                 <td> {{ submission.createdBy.display_name }} </td>
-                <td> {{  <!-- ratings -- > }} </td>
-                <td> {{  <!-- badges} -- > }} </td>
+                <td> {{ submission.ratings }} </td>
+                <td> 
+                    <ul>
+                        <li ng-repeat="(name, badge) in submission.badges" style="display:inline; margin:5px;">  
+                            {{ name }} , {{ badge.badgeCount }} 
+                        </li>
+                    </ul>
+                </td>
             </tr>
         </table>
     </div>

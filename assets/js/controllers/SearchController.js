@@ -1,6 +1,6 @@
 angular.module('appControllers').controller("SearchController", 
-  ['$scope', 'ChampionRoleService', 'ChampionService', 'BadgeTypeService', 'SubmissionService',
-  function($scope, ChampionRoleService, ChampionService, BadgeTypeService, SubmissionService) {
+  ['$scope', 'ChampionRoleService','UtilService', 'ChampionService','BadgeTypeService', 'BadgeService', 'SubmissionService',
+  function($scope, ChampionRoleService, UtilService, ChampionService, BadgeTypeService, BadgeService, SubmissionService) {
 
     $scope.tagline = "searchView";
 
@@ -23,7 +23,7 @@ angular.module('appControllers').controller("SearchController",
     $scope.hasData = false;
 
     $scope.submit = function() { 
-      
+      console.log($scope.getData);
       //manipulate query
       if($scope.keyword != "")
         $scope.getData.title = {"contains":$scope.keyword};
@@ -38,15 +38,29 @@ angular.module('appControllers').controller("SearchController",
 
       console.log("GET " + JSON.stringify(query));
 
-      SubmissionService.get.query(query, function(response){
-        $scope.submissions = response;
+      SubmissionService.query(query, function(response){
         $scope.showResult = true;
+
         if(response.length != 0)
           $scope.hasData = true;
         else
           $scope.hasData = false;
 
-          $scope.getData = {};
+        //for each submission, get badges in human readable way
+        angular.forEach(response, function(submission){
+          BadgeService.getBadges(submission.badges).then(function(badges){
+            console.log("Set badges " + JSON.stringify(badges));
+            submission.badges = badges;
+          });
+          //add submision link
+          submission.link = "kirill#/submission/" + submission.id;
+          submission.ratings = UtilService.getRatings(submission.ratings);
+          console.log("Set ratings " + submission.ratings);
+        });
+        
+        $scope.submissions = response;
+        //clear out query 
+        $scope.getData = {};
       });
     }
 }]);
