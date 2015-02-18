@@ -10,6 +10,7 @@ angular.module('appControllers').controller("SubmissionViewController",
     $scope.logState = AuthService.logState();
     console.log("subview created");
     console.log($scope.logState);
+
     CommentService.query({written_to: $scope.subid}, function(comments){
         $scope.comments = comments;
         console.log($scope.comments);
@@ -20,19 +21,18 @@ angular.module('appControllers').controller("SubmissionViewController",
     //calculate number of badges 
     //this can be done either frontend or backend
     //ideally this supposed to go to backend or service to reuse anywhere we want
+    /*)
     $scope.updateBadges = function() {
         console.log("updating badges");
 
         BadgeService.counts($scope.subid)
             .then(function(data){
-                $scope.badges = data.badges;
+                $scope.badges = data;
   
                 console.log($scope.badgeTypeMap);
             }, function(data){
                 //error handler
                 console.log("Badge service error");
-                console.log(data.status);
-                console.log(data.data);
             });
     };
 
@@ -43,10 +43,9 @@ angular.module('appControllers').controller("SubmissionViewController",
             $scope.badgeTypeMap[badgetype.name] = badgetype.id;
             if(!(badgetype.name in $scope.badges))
                 $scope.badges[badgetype.name] = 0;
-        });
-        
+        }); 
     });
-
+    */
     //ratings same as badge
     $scope.ratings = 0;
 
@@ -59,11 +58,11 @@ angular.module('appControllers').controller("SubmissionViewController",
             //therefore non-intutive way to display badge here
 
             //rating is simple
-            angular.forEach(submission.ratings, function(rating){
-                $scope.ratings += rating.value;
+            $scope.ratings = UtilService.getRatings(submission.ratings);
+            BadgeService.getBadges(submission.badges).then(function(data){
+                $scope.badges = data;
+                console.log(data);
             });
-            $scope.ratings /= submission.ratings.length;
-            
             //daily, monthly, weekly, 
             //any tags?
 
@@ -125,6 +124,7 @@ angular.module('appControllers').controller("SubmissionViewController",
         console.log("Badge added " + badgeName + " and id " + $scope.badgeTypeMap[badgeName]);        
     };
 
+    //comment related funcitonalities 
     $scope.newComment = "";
     $scope.submitComment = function() {
         if(!$scope.handleNonUser())
