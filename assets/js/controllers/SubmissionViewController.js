@@ -16,36 +16,11 @@ angular.module('appControllers').controller("SubmissionViewController",
         console.log($scope.comments);
     });
 
-    $scope.badgeTypeMap = {};
     $scope.badges = {};
     //calculate number of badges 
     //this can be done either frontend or backend
     //ideally this supposed to go to backend or service to reuse anywhere we want
-    /*)
-    $scope.updateBadges = function() {
-        console.log("updating badges");
-
-        BadgeService.counts($scope.subid)
-            .then(function(data){
-                $scope.badges = data;
-  
-                console.log($scope.badgeTypeMap);
-            }, function(data){
-                //error handler
-                console.log("Badge service error");
-            });
-    };
-
-    $scope.updateBadges();
-
-    BadgeTypeService.query({}, function(badgetypes) {
-        angular.forEach(badgetypes, function(badgetype){
-            $scope.badgeTypeMap[badgetype.name] = badgetype.id;
-            if(!(badgetype.name in $scope.badges))
-                $scope.badges[badgetype.name] = 0;
-        }); 
-    });
-    */
+    
     //ratings same as badge
     $scope.ratings = 0;
 
@@ -108,7 +83,7 @@ angular.module('appControllers').controller("SubmissionViewController",
         var postData = {};
         postData.given_to = $scope.subid;
         postData.from = $window.sessionStorage.userid; 
-        postData.badge_type = $scope.badgeTypeMap[badgeName];
+        postData.badge_type = $scope.badges[badgeName].badgeId;
         
         var badge = new BadgeService.get(postData);
         
@@ -116,12 +91,12 @@ angular.module('appControllers').controller("SubmissionViewController",
 
         badge.$save().then(function(data){
             console.log("succeeed");
-            $scope.badges[badgeName] += 1;
+            $scope.badges[badgeName].badgeCount += 1;
         }, function(data){
             //TODO: if it is already given, re-click -> remove badge ??
             console.log("ccannot add badge");
         });
-        console.log("Badge added " + badgeName + " and id " + $scope.badgeTypeMap[badgeName]);        
+        console.log("Badge added " + badgeName + " and id " + $scope.badges[badgeName].badgeId);        
     };
 
     //comment related funcitonalities 
