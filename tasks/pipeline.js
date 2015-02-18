@@ -47,13 +47,15 @@ var jsFilesToInject = [
   'js/AppServices.js',
   'js/AppControllers.js',
   'js/AppDirectives.js',
+  'js/AppFilters.js',
   'js/appRoutes.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
   'js/controllers/*.js',
   'js/directives/*.js',
-  'js/services/*.js'
+  'js/services/*.js',
+  'js/filters/*.js'
 ];
 
 

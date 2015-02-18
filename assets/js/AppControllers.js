@@ -1,1 +1,1 @@
-var controllers = angular.module('appControllers', ['appServices', 'angularFileUpload']);
+var controllers = angular.module('appControllers', ['appServices','appFilters', 'angularFileUpload']);

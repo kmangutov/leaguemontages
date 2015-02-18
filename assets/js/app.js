@@ -2,7 +2,8 @@ var app = angular.module("app", [
   'ngRoute',
   'appControllers',
   'appServices',
-  'appDirectives'
+  'appDirectives',
+  'appFilters'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
