@@ -56,29 +56,21 @@ services.factory('BadgeService',
     return promise;
   };
 
-  service.getBadges = function(badges){
+  service.getBadges = function(types, badges){
     var retBadges = {};
     var badgeTypeMap = {};
-
-    var promise = 
-      $http.get('/api/v1.0/BadgeType')
-           .then(function(badgetypes){
-              angular.forEach(badgetypes.data, function(badgetype){
-                badgeTypeMap[badgetype.id] = badgetype.name;
-                retBadges[badgetype.name] = {badgeCount:0, badgeId:badgetype.id};
-              });
-              console.log(JSON.stringify(retBadges));
-              angular.forEach(badges, function(badge){
-                var key = badge.badge_type;
-                if(badgeTypeMap[key] in retBadges)
-                  retBadges[badgeTypeMap[key]].badgeCount += 1;
-              }); 
-              return retBadges;
-           }, function(res){
-              return retBadges;
-           });
-
-    return promise;
+      //$http.get('/api/v1.0/BadgeType').then(function(badgetypes){
+    angular.forEach(types, function(badgetype){
+      badgeTypeMap[badgetype.id] = badgetype.name;
+      retBadges[badgetype.name] = {badgeCount:0, badgeId:badgetype.id};
+    });
+    console.log(JSON.stringify(retBadges));
+    angular.forEach(badges, function(badge){
+      var key = badge.badge_type;
+      if(badgeTypeMap[key] in retBadges)
+        retBadges[badgeTypeMap[key]].badgeCount += 1;
+    }); 
+    return retBadges;  
   }
 
   return service;

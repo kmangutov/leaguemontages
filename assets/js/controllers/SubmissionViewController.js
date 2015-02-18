@@ -16,7 +16,10 @@ angular.module('appControllers').controller("SubmissionViewController",
         console.log($scope.comments);
     });
 
-    $scope.badges = {};
+    BadgeTypeService.query({}, function(badgetypes){
+        $scope.badgetypes = badgetypes;
+    });
+
     //calculate number of badges 
     //this can be done either frontend or backend
     //ideally this supposed to go to backend or service to reuse anywhere we want
@@ -34,10 +37,7 @@ angular.module('appControllers').controller("SubmissionViewController",
 
             //rating is simple
             $scope.ratings = UtilService.getRatings(submission.ratings);
-            BadgeService.getBadges(submission.badges).then(function(data){
-                $scope.badges = data;
-                console.log(data);
-            });
+            $scope.badges = BadgeService.getBadges($scope.badgetypes, submission.badges);
             //daily, monthly, weekly, 
             //any tags?
 

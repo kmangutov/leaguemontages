@@ -1,5 +1,5 @@
 angular.module('appControllers').controller("SearchController", 
-  ['$scope', 'ChampionRoleService','UtilService', 'ChampionService','BadgeTypeService', 'BadgeService', 'SubmissionService',
+  ['$scope', 'ChampionRoleService', 'UtilService', 'ChampionService','BadgeTypeService', 'BadgeService', 'SubmissionService',
   function($scope, ChampionRoleService, UtilService, ChampionService, BadgeTypeService, BadgeService, SubmissionService) {
 
     $scope.tagline = "searchView";
@@ -21,6 +21,10 @@ angular.module('appControllers').controller("SearchController",
     $scope.keyword = "";
     $scope.showResult = false;
     $scope.hasData = false;
+    $scope.badgeTypeMap = {};
+
+    //order by badges 
+    //submissions is filled by search already
 
     $scope.submit = function() { 
       console.log($scope.getData);
@@ -28,8 +32,7 @@ angular.module('appControllers').controller("SearchController",
       if($scope.keyword != "")
         $scope.getData.title = {"contains":$scope.keyword};
       
-      //if badgetype is on, order desc count badge of badgetype
-      
+      //if badgetype is on, order desc count badge of badgetype   
       //add other attribute fields
       var query = {};
       if(!(JSON.stringify($scope.getData) === '{}')){
@@ -48,14 +51,10 @@ angular.module('appControllers').controller("SearchController",
 
         //for each submission, get badges in human readable way
         angular.forEach(response, function(submission){
-          BadgeService.getBadges(submission.badges).then(function(badges){
-            console.log("Set badges " + JSON.stringify(badges));
-            submission.badges = badges;
-          });
+          submission.badges = BadgeService.getBadges($scope.badgeTypes, submission.badges);
           //add submision link
           submission.link = "kirill#/submission/" + submission.id;
           submission.ratings = UtilService.getRatings(submission.ratings);
-          console.log("Set ratings " + submission.ratings);
         });
         
         $scope.submissions = response;

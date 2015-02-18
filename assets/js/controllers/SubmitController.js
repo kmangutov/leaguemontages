@@ -84,11 +84,10 @@ angular.module('appControllers').controller("SubmitController",
           console.log("PUT " + stringData); 
 
           var submission = new SubmissionService($scope.postData);
-          submission.$save()
-                .then(function(res){
-                    console.log(res.id);
-                    //redirect user to submission view
-                    $window.location.href = 'http://localhost:1337/kirill#/submission/' + res.id;
+          submission.$save().then(function(res){
+            console.log(res.id);
+            //redirect user to submission view
+            $window.location.href = 'http://localhost:1337/kirill#/submission/' + res.id;
           });   
         });
       }
