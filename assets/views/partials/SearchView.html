@@ -50,7 +50,7 @@
                 <td> Ratings </td>
                 <td> Badges </td>
             </tr>
-            <tr ng-repeat="submission in submissions | orderBadgeBy: 'Creative'" style="padding-right:10px;">
+            <tr ng-repeat="submission in submissions | orderByRating " style="padding-right:10px;">
                 <!-- TODO: show necessary information about submission --> 
                 <td> <a href="{{submission.link}}">{{ submission.title }}</a></td>
                 <td> {{ submission.url }} </td>
