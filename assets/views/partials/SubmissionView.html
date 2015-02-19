@@ -13,7 +13,7 @@
        
         <ul>
             <li ng-repeat="(name, badge) in badges" style="display:inline; margin:20px;">
-                <div class="btn btn-default" ng-click="badgeHandler(name)">{{name}}</div>{{badge.badgeCount}}
+                <div class="btn btn-default" ng-click="badgeHandler(badge)">{{name}}</div>{{badge.badgeCount}}
             </li>
         </ul>
         <br/>

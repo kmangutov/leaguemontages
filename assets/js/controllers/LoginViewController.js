@@ -49,19 +49,6 @@ angular.module('appControllers').controller('LoginViewController',
            
     };
 
-    /* To main view 
-    $scope.logout = function() {
-        //call auth/logout 
-        AuthService.logout()
-            .success(function(data){
-
-            })
-            .error(function(data){
-
-            });
-    };
-    */
-    
     $scope.isFilled = {displayName:true, email:true, password:true};
 
     $scope.register = function() {

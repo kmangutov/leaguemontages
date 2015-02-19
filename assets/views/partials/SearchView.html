@@ -41,29 +41,48 @@
         No search results
     </div>
 
+    <div class="bar">
+
+        <!-- These two buttons switch the layout variable,
+             which causes the correct UL to be shown. -->
+        <p>{{submissions.length}} founds</p>
+        <a class="list-icon" ng-class="{active: layout == 'list'}" ng-click="layout = 'list'"></a>
+        <a class="grid-icon" ng-class="{active: layout == 'grid'}" ng-click="layout = 'grid'"></a>
+    </div>
     <div ng-show="hasData">
-        <table id="result">
-            <tr id="result-header">
-                <td> Title </td>
-                <td> URL </td>
-                <td> Username </td>
-                <td> Ratings </td>
-                <td> Badges </td>
-            </tr>
-            <tr ng-repeat="submission in submissions | orderByRating " style="padding-right:10px;">
-                <!-- TODO: show necessary information about submission --> 
-                <td> <a href="{{submission.link}}">{{ submission.title }}</a></td>
-                <td> {{ submission.url }} </td>
-                <td> {{ submission.createdBy.display_name }} </td>
-                <td> {{ submission.ratings }} </td>
-                <td> 
-                    <ul>
-                        <li ng-repeat="(name, badge) in submission.badges" style="display:inline; margin:5px;">  
-                            {{ name }} , {{ badge.badgeCount }} 
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        </table>
+        <!-- using bootstrap -->
+        <div class="row" id="result" ng-show="layout == 'grid'">
+            <div grid-element class="col-md-3" dir-paginate="submission in submissions 
+                                                                    | orderByRating 
+                                                                    | itemsPerPage: perPage">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h4> {{submission.title}} </h4>
+                        <p> {{submission.createdBy.display_name}} </p>
+                        <p> Rating: {{submission.ratings}}</p>
+                        <div id="badge">
+                            <i class="fa fa-magic" rel='tooltip' title="Creative">
+                                {{submission.badges.Creative.badgeCount}}</i>
+                            <i class="fa fa-thumbs-o-up" rel='tooltip' title="Humor">
+                                {{submission.badges.Humor.badgeCount}}</i>
+                            <i class="fa fa-gear" rel='tooltip' title="Editing">
+                                {{submission.badges.Editing.badgeCount}}</i>
+                            <i class="fa fa-bolt" rel='tooltip' title="Skilled">
+                                {{submission.badges.Skilled.badgeCount}}</i>
+                        </div>
+                        <p><a href="{{submission.link}}" class="label label-default" title="view">view</a></p>
+                    </div>
+                    <img ng-src="{{submission.thumbnail_url}}" />
+                </div>
+            </div>
+        </div>
+        <!-- end of grid -->
+
+        <!-- start of list -->
+        <div class="row" id="result" ng-show="layout == 'list'">
+        </div>
+        <!-- end of list -->
+        
+        <dir-pagination-controls></dir-pagination-controls>
     </div>
 </div>

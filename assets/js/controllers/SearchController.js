@@ -22,7 +22,14 @@ angular.module('appControllers').controller("SearchController",
     $scope.showResult = false;
     $scope.hasData = false;
     $scope.badgeTypeMap = {};
+    $scope.layout = "grid";
 
+
+    //pagination
+    //$scope.filteredSubmissions = [];
+    //$scope.currentPage = 1;
+    $scope.perPage = 2;
+    //$scope.maxSize = 5;
     //order by badges 
     //submissions is filled by search already
 
