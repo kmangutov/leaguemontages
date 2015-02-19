@@ -7,8 +7,12 @@
 		"angular":"master",
 		"angular-route":"master",
 		"ngDialog":"master",
-        "ng-admin":"master",
+        "ng-admin":"latest",
 		"angular-resource":"master",
-		"ngDialog":"master"
+		"ngDialog":"master",
+		"ngSticky":"master",
+		"angular-ui":"master",
+		"font-awesome": "master",
+		"angular-utils-pagination":"master"
 	}
 }

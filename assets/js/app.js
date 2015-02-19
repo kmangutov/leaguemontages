@@ -3,7 +3,8 @@ var app = angular.module("app", [
   'appControllers',
   'appServices',
   'appDirectives',
-  'appFilters'
+  'appFilters',
+  'angularUtils.directives.dirPagination'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {

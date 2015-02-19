@@ -16,10 +16,9 @@
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
   'css/*.css',
+  'libs/fontawesome/css/font-awesome.css',
   'libs/bootstrap/dist/css/bootstrap.css',
   'libs/animate.css/animate.css',
-  'libs/ngDialog/css/ngDialog.css',
-  'libs/ngDialog/css/ngDialog-theme-default.css',
   'libs/jquery/dist/jquery.css',
 ];
 
@@ -38,10 +37,9 @@ var jsFilesToInject = [
   
   'libs/angular-route/angular-route.js',
   'libs/angular-resource/angular-resource.js',
-  'libs/ngDialog/js/ngDialog.js',
   'libs/ng-file-upload/angular-file-upload.js',
   'libs/ng-file-upload/angular-file-upload-shim.js',
-  
+  'libs/angular-utils-pagination/dirPagination.js',
   'js/app.js',
   'js/adminApp.js',
   'js/AppServices.js',
