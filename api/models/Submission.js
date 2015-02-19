@@ -20,6 +20,10 @@ module.exports = {
 			required: true
 		},
 
+		thumbnail_url: {
+			type: 'string'
+		},
+
 		description: {
 			type: 'text'
 		},
