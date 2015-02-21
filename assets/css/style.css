@@ -33,21 +33,22 @@ html {
 }
 
 /* small */
-@media (max-width: 699px) {
+@media (max-width: 787px) {
     #side_banner {  
       height: 100px;
       background: #888888;
     }
 }
+
 /* tablet */
-@media (max-width: 1199px) and (min-width: 700px) {
+@media (min-width: 768px) {
     #side_banner {  
       height: 200px;
       background: #888888;
     }
 }
 /* large desktop banner height */
-@media (min-width:1200px) {
+@media (min-width: 992px) {
     #side_banner {
        height: 100%;
        background: #888888;
@@ -82,10 +83,20 @@ html {
 #login {
   padding-top: 50px
 }
-#login .form-wrap {
-  width: 30%;
-  margin: 0 auto;
+
+@media (max-width: 400px){
+  #login .form-wrap {
+    width: 70%;
+    margin: 0 auto;
+  }
 }
+@media (min-width: 401px){
+  #login .form-wrap {
+    width: 30%;
+    margin: 0 auto;
+  }
+}
+
 #login h1 {
   color: black;
   font-size: 18px;
@@ -134,18 +145,6 @@ html {
   background:black;
 }
 
-#login .forget {
-  font-size: 13px;
-  text-align: center;
-  display: inline-block;
-}
-
-#login .signup {
-  font-size: 13px;
-  display: inline-block;
-  text-align: center;
-  width:35%;
-}
 
 /*    --------------------------------------------------
     :: Inputs & Buttons

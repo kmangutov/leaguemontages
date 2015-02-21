@@ -4,7 +4,7 @@
 <section id="login">
   <div class="view_container">
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-md-12">
         <div class="form-wrap">
           <h1>Log in with your email account</h1>
           <p id="log-label" ng-show="hasFailed">{{ result }}</p>
@@ -19,8 +19,14 @@
             </div>
             <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" ng-click="login()" value="Log in">
           </form>
-          <a href="#" class="signup" data-toggle="modal" data-target="#signup-modal">Sign up</a>
-          <a href="#" class="forget" data-toggle="modal" data-target="#forget-modal">Forgot your password?</a>
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <a href="#" class="signup" data-toggle="modal" data-target="#signup-modal">Sign up</a>
+            </div>
+            <div class="col-md-6 text-center">
+              <a href="#" class="forget" data-toggle="modal" data-target="#forget-modal">Forgot your password?</a>
+            </div>
+          </div>
           <hr>
         </div>
       </div> <!-- /.col-xs-12 -->
