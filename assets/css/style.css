@@ -235,6 +235,9 @@ ul.list li p{
   The search input
 --------------------------*/
 
+#search_button button {
+  margin: 0px;
+}
 .bar{
   background-color:#e7e7e7;
   box-shadow: 0 1px 1px #ccc;
@@ -315,4 +318,19 @@ ul.list li p{
 .thumbnail {
     position:relative;
     overflow:hidden;
+}
+
+
+/* ------ submision view ----- */
+@media (max-width: 600px){
+  video {
+    width:100%;
+  }
+}
+
+@media (min-width: 601px){
+  video {
+    width: 600px;
+    height: 400px;
+  }
 }

@@ -1,7 +1,6 @@
 <div class="banner_left">
 </div>
 
-<div class="container-fluid">
     <div class="alert alert-warning" ng-show="!isAccessible">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong>Warning!</strong> You need to login first.
@@ -14,7 +13,7 @@
     <div class="sub_body">
         <div class="row">
             <div class="col-lg-7">
-                <video ng-show="subData.url" ng-src="{{ subData.url }}"  controls width="600" height="400">
+                <video ng-show="subData.url" ng-src="{{ subData.url }}"  controls>
                 </video>
             </div>
             <div class="col-lg-5" style="margin-top:40px;">
@@ -49,7 +48,7 @@
         <!-- TODO: social integration -->
         <div class="comments list">
             <p> Comments </p>
-             <textarea ng-model="newComment" rows="8" cols="50" class="input-no-width rounded shaded left clearboth" id="msg"></textarea>
+             <textarea ng-model="newComment" rows="8" cols="40" class="input-no-width rounded shaded left clearboth" id="msg"></textarea>
             <div class="btn btn-default" id="comment_apply" ng-click="submitComment()">Leave comment</div>
             <div class="col-lg-8">
             <table class="comment table">
@@ -78,7 +77,7 @@
         </div>
         </div>
     </div>
-</div>
+
 
 <div class="banner_right">
 </div>
