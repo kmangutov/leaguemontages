@@ -28,7 +28,7 @@ angular.module('appControllers').controller("SearchController",
     //pagination
     //$scope.filteredSubmissions = [];
     //$scope.currentPage = 1;
-    $scope.perPage = 2;
+    $scope.perPage = 4;
     //$scope.maxSize = 5;
     //order by badges 
     //submissions is filled by search already
