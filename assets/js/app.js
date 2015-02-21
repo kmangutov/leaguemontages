@@ -34,6 +34,23 @@ app.config(['$routeProvider', function($routeProvider) {
       controller: 'LoginViewController'
     })
 
+    .when('/feeds', {
+      templateUrl: 'views/partials/feedView.html',
+      controller: 'FeedViewController'
+    })
+
+    .when('/contact-us', {
+
+    })
+
+    .when('/about', {
+
+    })
+
+    .when('/policy', {
+      
+    })
+
     .otherwise({
       templateUrl: 'views/404.html',
     });
