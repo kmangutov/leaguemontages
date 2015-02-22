@@ -18,6 +18,11 @@ controller.controller('UserViewController',
                 $scope.isValidUser = true;
                 $scope.pageUser = user[0];
             }
-
         });
+
+    //get total badges, ratings
+    //display submissions 
+    //follwing/follwer count
+
+    //if visitor is user himself, display some analytics (weekly,monthly,daily counts etc)
 }]);
