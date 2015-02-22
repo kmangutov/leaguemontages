@@ -23,6 +23,7 @@ controller.controller('UserViewController',
     //get total badges, ratings
     //display submissions 
     //follwing/follwer count
-
+    //following/unfollow button
+    
     //if visitor is user himself, display some analytics (weekly,monthly,daily counts etc)
 }]);
