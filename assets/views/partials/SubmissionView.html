@@ -1,46 +1,64 @@
 <div class="banner_left">
 </div>
-
+    <!-- error messages -->
     <div class="alert alert-warning" ng-show="!isAccessible">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong>Warning!</strong> You need to login first.
     </div>
-    <!-- display all infomation about a particular submission -->
-    <div class="sub_title">
-        <h2>{{ subData.title }}</h2>
+    <div class="alert alert-warning" ng-show="!isValidSubmission">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Warning!</strong> Requested submission does not exist.
     </div>
+    <!-- display all infomation about a particular submission -->
+    
+    <div class="container-fluid" ng-show="isValidSubmission">
 
-    <div class="sub_body">
-        <div class="row">
-            <div class="col-lg-7">
+        <div class="sub_title">
+            <h2>{{ subData.title }}</h2>
+        </div>
+
+        <div class="sub_body">
+            <div class="row">
+            <div class="col-md-8">
                 <video ng-show="subData.url" ng-src="{{ subData.url }}"  controls>
                 </video>
             </div>
-            <div class="col-lg-5" style="margin-top:40px;">
-                created at : {{ subData.createdAt | date:'MM/dd/yyyy @ h:mma'}} <br/>
-                url : {{ subData.url }} <br/>
-                title : {{ subData.title }} <br/>
-                created by : {{ userName }} <br/> 
-                description : {{ subData.description }} <br/>
+            <div class="col-md-4" style="margin-top:40px;">
+                <div class="row">
+                    <div id="submission_info" class="col-sm-6">
+                        {{ subData.createdAt | date:'MM/dd/yyyy @ h:mma'}} <br/>
+                        <div id="desc-box">
+                            description : {{ subData.description }} <br/>
+                        </div>
+                        created by : {{ userName }} <br/>  <!-- TODO:link to user profile page -->
+                
 
-                <p>Ratings: {{ ratings }} </p>
-                <p>Views: {{ views }} </p>
-
+                    </div>
                 <!-- TODO: badge, rating, view counts, etc -->   
-                 <ul>
-                    <li ng-repeat="(name, badge) in badges" style="display:inline; margin:10px;">
-                        <div class="btn btn-default" ng-click="badgeHandler(badge)">{{name}}</div>{{badge.badgeCount}}
-                    </li>
-                </ul>
+                
+                    <div id="badge" class="col-sm-6">
+                        Ratings: {{ ratings }} <br/>
+                        Views: {{ views }} <br/>
+                        <i class="fa fa-magic" rel='tooltip' title="Creative">
+                            {{badges['Creative'].badgeCount}}</i>
+                        <i class="fa fa-thumbs-o-up" rel='tooltip' title="Humor">
+                            {{badges['Humor'].badgeCount}}</i>
+                        <i class="fa fa-gear" rel='tooltip' title="Editing">
+                            {{badges['Editing'].badgeCount}}</i>
+                        <i class="fa fa-bolt" rel='tooltip' title="Skilled">
+                            {{badges['Skilled'].badgeCount}}</i>
+                    </div> 
+                    <!--
+                    <div class="col-md-4" ng-repeat="(name, badge) in badges" style="display:inline; margin:10px;">
+                        <div class="btn btn-default" ng-click="badgeHandler(badge)">{{name}}</div> : {{badge.badgeCount}}
+                    </div>
+                    -->
+                </div> <!-- end row -->
                 <br/>
 
-            </div>
-        </div>
-    </div>
-    
-
-
-
+            </div> <!-- end col -->
+            </div> <!-- end row -->
+        </div> <!-- end sub_body -->
     <br/>
     <br/>
     
@@ -49,7 +67,7 @@
         <div class="comments list">
             <p> Comments </p>
             
-            <div class="row"> <div class="col-md-4">
+            <div class="row"> <div class="col-md-6">
                 <form ng-submit="submitComment">
                     <div class="form-group">
                         <textarea ng-model="newComment" class="form-control" rows="8" cols="40" class="input-no-width rounded shaded left clearboth" id="msg"></textarea>
@@ -57,10 +75,11 @@
                     <button type="submit" class="btn btn-default form-control element-bottom">Leave comment</button>
                 </form>
                 </div>
-            </div>
+            </div> <!-- end row -->
             <br/>
-            
-            <div class="col-lg-8">
+
+            <div class="row">
+            <div class="col-md-8">
             <table class="comment table">
             <!-- TODO: test with mysql, iterate over comments -->
                 <tr ng-repeat="comment in comments | orderBy: '+createdAt'">
@@ -68,7 +87,7 @@
                     <td> {{ comment.createdAt | date:'MM/dd/yyyy @ h:mma'}} </td>
                     <td> 
                         <div ng-show="editing==comment.id">
-                            <textarea ng-model="comment.text" rows="2" cols="50" class="input-no-width rounded shaded left clearboth" id="msg"></textarea>
+                            <textarea ng-model="comment.text" rows="2" cols="40" class="input-no-width rounded shaded left clearboth" id="msg"></textarea>
                         </div>
                         <div ng-show="!(editing==comment.id)">{{ comment.text }}</div> 
                     </td>
@@ -87,7 +106,8 @@
         </div>
         </div>
     </div>
-
+    </div>
+</div> <!-- end container fluid -->
 
 <div class="banner_right">
 </div>

@@ -60,11 +60,13 @@ angular.module('appControllers').controller("SearchController",
         angular.forEach(response, function(submission){
           submission.badges = BadgeService.getBadges($scope.badgeTypes, submission.badges);
           //add submision link
-          submission.link = "kirill#/submission/" + submission.id;
+          submission.link = "/#/submission/" + submission.id;
           submission.ratings = UtilService.getRatings(submission.ratings);
         });
         
         $scope.submissions = response;
+        //possibly want to save last search query to maintain state when user press back 
+        
         //clear out query 
         $scope.getData = {};
       });

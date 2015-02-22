@@ -53,10 +53,11 @@ angular.module('appControllers').controller("SubmissionViewController",
             //get counter up for viewCounter and model itself
             //submission.view.value += 1;
             SubmissionService.update({id:$scope.subid, view: $scope.views});
-         
+            $scope.isValidSubmission = true;
 
         }, function(errResponse) {
             $scope.error = errResponse;
+            $scope.isValidSubmission = false;
         });
 
     //comments 

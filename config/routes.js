@@ -36,10 +36,6 @@ module.exports.routes = {
     view: 'kirill'
   },
 
-  '/kirill': {
-    view: 'kirill'
-  },
-
   '/admin': {
     view : 'admin'
   },
