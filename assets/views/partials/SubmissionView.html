@@ -10,7 +10,7 @@
         <strong>Warning!</strong> Requested submission does not exist.
     </div>
     <!-- display all infomation about a particular submission -->
-    
+
     <div class="container-fluid" ng-show="isValidSubmission">
 
         <div class="sub_title">
@@ -36,17 +36,25 @@
                     </div>
                 <!-- TODO: badge, rating, view counts, etc -->   
                 
-                    <div id="badge" class="col-sm-6">
+                    <div badge-icons id="badgelist" class="col-sm-6">
                         Ratings: {{ ratings }} <br/>
                         Views: {{ views }} <br/>
-                        <i class="fa fa-magic" rel='tooltip' title="Creative">
+                        <span id="badgeIcon">
+                        <i class="fa fa-magic fa-3x" rel='tooltip' title="Creative" ng-click="badgeHandler('Creative')">
                             {{badges['Creative'].badgeCount}}</i>
-                        <i class="fa fa-thumbs-o-up" rel='tooltip' title="Humor">
+                        </span>
+                        <span id="badgeIcon">
+                        <i class="fa fa-thumbs-o-up fa-3x" rel='tooltip' title="Humor" ng-click="badgeHandler('Humor')">
                             {{badges['Humor'].badgeCount}}</i>
-                        <i class="fa fa-gear" rel='tooltip' title="Editing">
+                        </span>
+                        <span id="badgeIcon">
+                        <i class="fa fa-gear fa-3x" rel='tooltip' title="Editing" ng-click="badgeHandler('Editing')">
                             {{badges['Editing'].badgeCount}}</i>
-                        <i class="fa fa-bolt" rel='tooltip' title="Skilled">
+                        </span>
+                        <span id="badgeIcon">
+                        <i class="fa fa-bolt fa-3x" rel='tooltip' title="Skilled" ng-click="badgeHandler('Skilled')">
                             {{badges['Skilled'].badgeCount}}</i>
+                        </span>
                     </div> 
                     <!--
                     <div class="col-md-4" ng-repeat="(name, badge) in badges" style="display:inline; margin:10px;">
@@ -68,7 +76,7 @@
             <p> Comments </p>
             
             <div class="row"> <div class="col-md-6">
-                <form ng-submit="submitComment">
+                <form ng-submit="submitComment()">
                     <div class="form-group">
                         <textarea ng-model="newComment" class="form-control" rows="8" cols="40" class="input-no-width rounded shaded left clearboth" id="msg"></textarea>
                     </div>
