@@ -20,6 +20,7 @@ var cssFilesToInject = [
   'libs/bootstrap/dist/css/bootstrap.css',
   'libs/animate.css/animate.css',
   'libs/jquery/dist/jquery.css',
+  'assets/styles/importer.css'
 ];
 
 
