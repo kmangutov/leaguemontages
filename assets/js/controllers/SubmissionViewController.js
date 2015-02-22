@@ -95,7 +95,7 @@ angular.module('appControllers').controller("SubmissionViewController",
             $scope.badges[badgeName].badgeCount += 1;
         }, function(data){
             //TODO: if it is already given, re-click -> remove badge ??
-            console.log("ccannot add badge");
+            console.log("cannot add badge");
         });
         console.log("Badge added " + badgeName + " and id " + $scope.badges[badgeName].badgeId);        
     };
@@ -124,7 +124,7 @@ angular.module('appControllers').controller("SubmissionViewController",
     };
 
     $scope.deleteComment = function(comment){
-        console.log("Deleting comment id " + comment);
+        console.log("Deleting comment id " + comment.id);
         //validate owner first
         if(comment.written_by.display_name != $scope.logState.username)
         {
@@ -132,7 +132,7 @@ angular.module('appControllers').controller("SubmissionViewController",
             return;
         }
 
-        CommentService.delete({}, {id:comment.id});
+        CommentService.delete({id:comment.id});
         //some animation?
         var index = $scope.comments.indexOf(comment);
         $scope.comments.splice(index, 1);

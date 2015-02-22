@@ -334,3 +334,8 @@ ul.list li p{
     height: 400px;
   }
 }
+
+#badgelist #badgeIcon :hover {
+  cursor: hand;
+  cursor: pointer;
+}
