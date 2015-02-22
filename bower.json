@@ -13,6 +13,7 @@
 		"ngSticky":"master",
 		"angular-ui":"master",
 		"font-awesome": "master",
-		"angular-utils-pagination":"master"
+		"angular-utils-pagination":"master",
+		"angular-flexslider":"latest"
 	}
 }

@@ -39,6 +39,11 @@ app.config(['$routeProvider', function($routeProvider) {
       controller: 'FeedViewController'
     })
 
+    .when('/user/:display_name', {
+      templateUrl: 'views/partials/UserView.html',
+      controller: 'UserViewController'
+    })
+
     .when('/contact-us', {
 
     })

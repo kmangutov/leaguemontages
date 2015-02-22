@@ -1,0 +1,10 @@
+<div class="alert alert-warning" ng-show="!isValidUser">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>Warning!</strong> User '{{ userview.display_name }}' does not exist.
+</div>
+
+<div class="container-fluid" ng-show="isValidUser">
+    <div class="row">
+        <h1>You are viewing {{ userview.display_name }}'s page </h1>
+    </div>
+</div>
