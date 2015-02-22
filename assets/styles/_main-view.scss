@@ -1,0 +1,59 @@
+
+
+#defaultView {
+  height:100%;
+  width:100%;
+}
+
+#defaultView .container-fluid {
+  height:100%;
+}
+
+#ondemand {
+  height: 800px;
+}
+
+/* small */
+@media (max-width: 787px) {
+    #side_banner {  
+      height: 100px;
+      background: #888888;
+    }
+}
+
+/* tablet */
+@media (min-width: 768px) {
+    #side_banner {  
+      height: 200px;
+      background: #888888;
+    }
+}
+/* large desktop banner height */
+@media (min-width: 992px) {
+    #side_banner {
+       height: 100%;
+       background: #888888;
+    }
+}
+
+#ondemandSection {
+  height: 100%;
+}
+
+#ondemandSection .row {
+  height: 50%;
+}
+
+#onDemandSlider {
+  background: blue;
+}
+
+#rankings #weekly {
+  height: 100%;
+  background: red;
+}
+
+#rankings #badges {
+  height: 100%;
+  background: purple;
+}

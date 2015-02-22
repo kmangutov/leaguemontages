@@ -1,2 +1,35 @@
 
-@import "background";
+@import "base";
+@import "grid";
+@import "inputs";
+@import "list";
+@import "login-section";
+@import "main-view";
+@import "search-input";
+@import "submission-view";
+
+
+//where does this go lol
+#badge i {
+  padding-right: 5px;
+}
+
+.caption {
+    position:absolute;
+    top:0;
+    right:0;
+    background:rgba(66, 139, 202, 0.75);
+    width:100%;
+    height:100%;
+    padding:2%;
+    display: none;
+    text-align:center;
+    color:#fff !important;
+    z-index:2;
+}
+
+.thumbnail {
+    position:relative;
+    overflow:hidden;
+}
+

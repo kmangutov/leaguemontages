@@ -1,0 +1,19 @@
+
+
+@media (max-width: 600px){
+  video {
+    width:100%;
+  }
+}
+
+@media (min-width: 601px){
+  video {
+    width: 600px;
+    height: 400px;
+  }
+}
+
+#badgelist #badgeIcon :hover {
+  cursor: hand;
+  cursor: pointer;
+}
