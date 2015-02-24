@@ -1,4 +1,6 @@
-angular.module('appDirectives').directive('followSection', ['UtilService','$timeout', function(UtilService, $timeout){
+angular.module('appDirectives').directive('followSection', 
+    ['UtilService','AuthService','$timeout', 
+    function(UtilService, AuthService, $timeout){
     return {
         restrict: 'A', //Element Attribute
         /**
@@ -8,13 +10,12 @@ angular.module('appDirectives').directive('followSection', ['UtilService','$time
          * @param: warnings - boolean variable to identify if there is a login user or not
          */
         scope: { 
-            logstate: '=', 
-            followstate: '=',
             targetuser: '=',
-            warnings:'='
+            warnings:'=' //TODO: this can be controlled here 
         },
         
         controller: function($scope) {
+            $scope.logstate = AuthService.logState();
 
             UtilService.checkFollowing($scope.logstate.userid, $scope.targetuser)
                     .then(function(isfollowing){
@@ -63,7 +64,7 @@ angular.module('appDirectives').directive('followSection', ['UtilService','$time
             };
         },
 
-        templateUrl: 'views/partials/followSection.html',
+        templateUrl: 'views/directiveTemplates/followSection.html',
 
         link: function(scope, element, attrs) {
             //DOMs

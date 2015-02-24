@@ -109,6 +109,7 @@ angular.module('appControllers').controller("SubmissionViewController",
     };
 
     //comment related funcitonalities 
+    //this also can be treated as directive for reusability 
     $scope.newComment = "";
     $scope.submitComment = function() {
         if(!$scope.handleNonUser())
@@ -161,7 +162,7 @@ angular.module('appControllers').controller("SubmissionViewController",
         }
         $scope.editable = "";
     };
-
+    //-----
 
     //--- will be removed --//
     $scope.follow = function(){

@@ -8,7 +8,6 @@ controller.controller('UserViewController',
     $scope.userview.display_name = $routeParams.display_name;
     $scope.pageUser = pageUser.data[0];
     $scope.isAccessible = true;
-    $scope.followState = {};
 
     console.log("user view ");
  
@@ -17,6 +16,7 @@ controller.controller('UserViewController',
     $scope.followers = $scope.pageUser.follower.length;
     $scope.followings = $scope.pageUser.following.length;
     console.log($scope.followState);
+    
     //console.log($scope.userid + " " + JSON.stringify($scope.logState));
     //inherit maincontroller scope variable
 
