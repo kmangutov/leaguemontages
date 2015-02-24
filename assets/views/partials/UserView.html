@@ -15,11 +15,8 @@
     <div class="row">
         <p>followers: {{ followers }}</p>
         <p>followings: {{ followings }}</p>
-        <div id="follower" class="col-sm-2" ng-hide="followState.ret">
-            <div class="btn btn-default" ng-click="follow()">Follow</div>
-        </div> 
-        <div id="follower" class="col-sm-2" ng-show="followState.ret">
-            <div class="btn btn-default" ng-click="unfollow()">Unfollow</div>
+
+        <div follow-section warnings="isAccessible" logstate="logState" 
+        followstate="followState" targetuser="pageUser.id">
         </div>
-    </div>
 </div>
