@@ -30,25 +30,25 @@ module.exports = {
 				return next(err);
 			if(!usr)
 				return next({err:404, msg:'User id ' + values.follower + ' not exist'});
-		});
-
-		//check following id exist
-		User.findOne({id:values.following}).exec(function(err, usr){
-			if(err)
-				return next(err);
-			if(!usr)
-				return next({err:404, msg:'User id ' + values.follower + ' not exist'});
-		});
-
-		UserFollower.findOne({follower:values.follower, following:values.following})
-			.exec(function(err,userfollow){
-
-			if(err)
-				return next(err);
-			if(userfollow)
-				return next({err:401, msg:'user ' + values.follower + ' is already following ' + values.following});
-		});
+					//check following id exist
 			
-		next();
+			User.findOne({id:values.following}).exec(function(err, usr){
+				if(err)
+					return next(err);
+				if(!usr)
+					return next({err:404, msg:'User id ' + values.following + ' not exist'});
+
+				UserFollower.findOne({follower:values.follower, following:values.following})
+					.exec(function(err,userfollow){
+
+					if(err)
+						return next(err);
+					if(userfollow)
+						return next({err:400, msg:'user ' + values.follower + ' is already following ' + values.following});
+					
+					next();
+				});
+			});
+		});
 	}
 };
