@@ -41,7 +41,12 @@ app.config(['$routeProvider', function($routeProvider) {
 
     .when('/user/:display_name', {
       templateUrl: 'views/partials/UserView.html',
-      controller: 'UserViewController'
+      controller: 'UserViewController',
+      resolve: {
+        pageUser: function($route, UtilService){
+          return UtilService.getUser($route.current.params.display_name);
+        }
+      }
     })
 
     .when('/contact-us', {

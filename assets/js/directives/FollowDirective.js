@@ -1,9 +1,14 @@
 angular.module('appDirectives').directive('followSection', ['UtilService','$timeout', function(UtilService, $timeout){
     return {
         restrict: 'A', //Element Attribute
-        //own scope binding with any parents
-        scope: { //isolate scope and get errors attribute
-            logstate: '=',
+        /**
+         * @param: logstate - current log state
+         * @param: followstate - {id:userid, ret:true} like object describing user follow state toward other user 
+         * @param: targetuser - a user to be tested for follow state
+         * @param: warnings - boolean variable to identify if there is a login user or not
+         */
+        scope: { 
+            logstate: '=', 
             followstate: '=',
             targetuser: '=',
             warnings:'='

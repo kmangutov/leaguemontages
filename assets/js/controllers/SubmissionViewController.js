@@ -10,7 +10,6 @@ angular.module('appControllers').controller("SubmissionViewController",
     $scope.logState = AuthService.logState();
 
     console.log("subview created");
-    console.log($scope.logState);
 
     CommentService.query({written_to: $scope.subid}, function(comments){
         $scope.comments = comments;
@@ -70,6 +69,7 @@ angular.module('appControllers').controller("SubmissionViewController",
 
     //comments 
     //CommentService.query({written_to: $scope.subid})
+    //is going to be remove ----
     $scope.handleNonUser = function() {
         if(!AuthService.logState().isLogged) //no login handle it
         {
@@ -163,7 +163,7 @@ angular.module('appControllers').controller("SubmissionViewController",
     };
 
 
-
+    //--- will be removed --//
     $scope.follow = function(){
         console.log("follow button was clicked");
         if(!$scope.handleNonUser())
@@ -188,6 +188,7 @@ angular.module('appControllers').controller("SubmissionViewController",
                     $scope.followState = data;
                 })
     };
+    /// --- ///
 
     $scope.$on("destroy", function(event){
       $timeout.cancel($scope.timeout);

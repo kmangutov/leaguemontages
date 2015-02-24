@@ -36,6 +36,7 @@ services.factory('UtilService', function($http, $interval, $timeout, $window){
   };
 
   utils.displayWithSecond = function(args){
+    console.log("displaywithSecond");
     var promise = $interval(function(){
       args.time -= 1;
     }, 1000);
@@ -86,6 +87,30 @@ services.factory('UtilService', function($http, $interval, $timeout, $window){
     });
     return promise;
   };
+
+
+  utils.getUser = function(username){
+    var promise = $http.get('/api/v1.0/user?display_name='+username);
+    promise.success(function(data, status, headers, conf){
+      if(data.length == 0)
+        return {isValidUser:false};
+      else {
+        data[0].isValidUser = true;
+        return data;
+      }
+    });
+    return promise;
+  };
+
+  utils.getSubmission = function(subid){
+    var promise = $http.get('/api/v1.0/submission?id='+subid);
+    promise.success(function(data, status, headers, conf){
+      return data; 
+    }).error(function(data, status,  headers, conf){
+      return data;
+    });
+    return promise;
+  }
 
   return utils;
 });
