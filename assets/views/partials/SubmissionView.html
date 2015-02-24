@@ -54,7 +54,7 @@
                             {{badges['Skilled'].badgeCount}}</i>
                         </span>
                     </div>
-                    <!-- display follow button if not owner -->
+                    <!-- display follow button if not owner, this can be reusable, TODO refactor to directive-->
                     <div id="follower" class="col-sm-2" ng-hide="followState.ret">
                         <div class="btn btn-default" ng-click="follow()">Follow</div>
                     </div> 

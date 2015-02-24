@@ -62,14 +62,15 @@ services.factory('UtilService', function($http, $interval, $timeout, $window){
     console.log('/api/v1.0/UserFollower?follower='+followerId+'&following='+followingId);
     var promise = $http.get('/api/v1.0/UserFollower?follower='+followerId+'&following='+followingId)
                        .then(function(res){
-                          console.log(res);
+                          console.log(JSON.stringify(res.data));
                           if(res.data.length == 0)
                             return {id: 0, ret:false};
                           else
-                            return {id:res.data.id, ret:true};
+                            return {id:res.data[0].id, ret:true};
                        });
     return promise;
   }
+  
   utils.follow = function(followerId, followingId){
     var promise = $http.post('/api/v1.0/UserFollower' , {follower: followerId, following:followingId})
                       .then(function(res){
