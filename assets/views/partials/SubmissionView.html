@@ -30,11 +30,9 @@
                         <div id="desc-box">
                             description : {{ subData.description }} <br/>
                         </div>
-                        created by : <a href="#/user/{{ userName }}">{{ userName }}</a> <br/>  <!-- TODO:link to user profile page -->
-                
+                        created by : <a href="#/user/{{ userName }}">{{ userName }}</a> <br/>  
 
                     </div>
-                <!-- TODO: badge, rating, view counts, etc -->   
                 
                     <div badge-icons id="badgelist" class="col-sm-6">
                         Ratings: {{ ratings }} <br/>
@@ -55,12 +53,14 @@
                         <i class="fa fa-bolt fa-3x" rel='tooltip' title="Skilled" ng-click="badgeHandler('Skilled')">
                             {{badges['Skilled'].badgeCount}}</i>
                         </span>
-                    </div> 
-                    <!--
-                    <div class="col-md-4" ng-repeat="(name, badge) in badges" style="display:inline; margin:10px;">
-                        <div class="btn btn-default" ng-click="badgeHandler(badge)">{{name}}</div> : {{badge.badgeCount}}
                     </div>
-                    -->
+                    <!-- display follow button if not owner -->
+                    <div id="follower" class="col-sm-2" ng-hide="followState.ret">
+                        <div class="btn btn-default" ng-click="follow()">Follow</div>
+                    </div> 
+                    <div id="follower" class="col-sm-2" ng-show="followState.ret">
+                        <div class="btn btn-default" ng-click="unfollow()">Unfollow</div>
+                    </div>
                 </div> <!-- end row -->
                 <br/>
 

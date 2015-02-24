@@ -8,6 +8,7 @@ angular.module('appControllers').controller("SubmissionViewController",
     $scope.error = null;
     $scope.isAccessible = true;
     $scope.logState = AuthService.logState();
+
     console.log("subview created");
     console.log($scope.logState);
 
@@ -43,6 +44,7 @@ angular.module('appControllers').controller("SubmissionViewController",
 
             //view counters
             $scope.subData = submission;
+            $scope.userid = submission.createdBy.id;
             $scope.userName = submission.createdBy.display_name;
             $scope.champion = submission.champ_type;
             $scope.championRole = submission.champ_role;
@@ -54,6 +56,12 @@ angular.module('appControllers').controller("SubmissionViewController",
             //submission.view.value += 1;
             SubmissionService.update({id:$scope.subid, view: $scope.views});
             $scope.isValidSubmission = true;
+
+            UtilService.checkFollowing($scope.logState.userid, $scope.userid)
+                .then(function(isfollowing){
+                    console.log("returned " + isfollowing);
+                    $scope.followState = isfollowing;
+                });
 
         }, function(errResponse) {
             $scope.error = errResponse;
@@ -152,6 +160,33 @@ angular.module('appControllers').controller("SubmissionViewController",
             CommentService.update({id:comment.id, text:comment.text});
         }
         $scope.editable = "";
+    };
+
+
+
+    $scope.follow = function(){
+        console.log("follow button was clicked");
+        if(!$scope.handleNonUser())
+            return;
+
+        console.log("processing following");
+
+        UtilService.follow($scope.logState.userid, $scope.userid)
+                .then(function(data){
+                    $scope.followState = data;
+                });
+    };
+
+    $scope.unfollow = function(){
+        console.log("unfollow button was clicked");
+        if(!$scope.handleNonUser())
+            return;
+
+        console.log("processing unfollowing");
+        UtilService.unfollow($scope.followState.id)
+                .then(function(data){
+                    $scope.followState = data;
+                })
     };
 
     $scope.$on("destroy", function(event){

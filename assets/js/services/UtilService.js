@@ -58,5 +58,33 @@ services.factory('UtilService', function($http, $interval, $timeout, $window){
     return totalRating;
   };
 
+  utils.checkFollowing = function(followerId, followingId){
+    console.log('/api/v1.0/UserFollower?follower='+followerId+'&following='+followingId);
+    var promise = $http.get('/api/v1.0/UserFollower?follower='+followerId+'&following='+followingId)
+                       .then(function(res){
+                          console.log(res);
+                          if(res.data.length == 0)
+                            return {id: 0, ret:false};
+                          else
+                            return {id:res.data.id, ret:true};
+                       });
+    return promise;
+  }
+  utils.follow = function(followerId, followingId){
+    var promise = $http.post('/api/v1.0/UserFollower' , {follower: followerId, following:followingId})
+                      .then(function(res){
+                        return {id:res.data.id, ret:true};
+                      });
+
+    return promise;
+  };
+
+  utils.unfollow = function(id){
+    var promise = $http.delete('/api/v1.0/UserFollower/'+id).then(function(res){
+      return {id:0, ret:false};
+    });
+    return promise;
+  };
+
   return utils;
 });
