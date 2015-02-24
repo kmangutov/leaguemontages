@@ -59,7 +59,7 @@ angular.module('appControllers').controller("SubmissionViewController",
 
             UtilService.checkFollowing($scope.logState.userid, $scope.userid)
                 .then(function(isfollowing){
-                    console.log("returned " + isfollowing);
+                    console.log("returned " + JSON.stringify(isfollowing));
                     $scope.followState = isfollowing;
                 });
 

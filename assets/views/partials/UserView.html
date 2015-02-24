@@ -2,9 +2,24 @@
     <a href="#" class="close" data-dismiss="alert">&times;</a>
     <strong>Warning!</strong> User '{{ userview.display_name }}' does not exist.
 </div>
+<div class="alert alert-warning" ng-show="!isAccessible">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>Warning!</strong> You need to login first.
+</div>
 
 <div class="container-fluid" ng-show="isValidUser">
     <div class="row">
         <h1>You are viewing {{ userview.display_name }}'s page </h1>
+    </div>
+
+    <div class="row">
+        <p>followers: {{ followers }}</p>
+        <p>followings: {{ followings }}</p>
+        <div id="follower" class="col-sm-2" ng-hide="followState.ret">
+            <div class="btn btn-default" ng-click="follow()">Follow</div>
+        </div> 
+        <div id="follower" class="col-sm-2" ng-show="followState.ret">
+            <div class="btn btn-default" ng-click="unfollow()">Unfollow</div>
+        </div>
     </div>
 </div>
