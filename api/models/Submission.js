@@ -91,11 +91,25 @@ module.exports = {
 		state: {
 			model: 'SubmissionState',
 			defaultsTo: 1 //default to pending 
-		},
-
-		incrementView:function(){
-			this.view = this.view + 1;
-			this.save();
 		}
+	},
+
+	//when view get updated, create viewcounter in order to 
+	//avoid exposing viewcounter api to public 
+	beforeUpdate: function(values, next){
+		Submission.findOne({id:values.id}).exec(function(err,submission){
+			if(err)
+				next(err);
+			if(!submission)
+				next("Submission does not exist");
+			if(submission.view + 1 == values.view) //updating view, hence create new viewcounter 
+			{
+				ViewCounter.create({submission_id:submission.id}).exec(function(verr, vc){
+					if(verr)
+						next(err);
+				});
+			}
+			next();
+		})
 	}
 };
