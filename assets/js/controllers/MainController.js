@@ -23,6 +23,11 @@ controller.controller('MainController', ['$scope', '$http', '$window', '$locatio
     console.log($scope.userinfo.logState);
     console.log($scope.userinfo.token);
 
+    $scope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
+        //keep saving previous path
+        console.log("Saving " + oldUrl); 
+        $window.sessionStorage.previousPath = oldUrl;
+    });
 
     //call /auth/logout and only viable when user is logged in
     $scope.logout = function(){
@@ -33,5 +38,8 @@ controller.controller('MainController', ['$scope', '$http', '$window', '$locatio
         delete $window.sessionStorage.userid;
 
         $window.sessionStorage.logState = false;
+        
+        $location.url('/');
+        $window.location.reload();
     };
 }]);

@@ -30,10 +30,10 @@ angular.module('appControllers').controller('LoginViewController',
                         $window.sessionStorage.token = data.token;
                         $window.sessionStorage.username = loginData.display_name;
                         $window.sessionStorage.logState = true;
-                        console.log($window.sessionStorage.username)
                         $scope.hasFailed = false;
                         //set login state as true
-                        $location.url('/'); //go to main view  
+                        //TODO: if previous page was login??
+                        $window.location.href = $window.sessionStorage.previousPath; //go to previous   
                     })
                     .error(function(data){
                         $scope.result = $scope.errors.tokenError;
