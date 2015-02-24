@@ -40,7 +40,7 @@ module.exports = {
 				return next({err:404, msg:'User id ' + values.follower + ' not exist'});
 		});
 
-		User_follower.findOne({follower:values.follower, following:values.following})
+		UserFollower.findOne({follower:values.follower, following:values.following})
 			.exec(function(err,userfollow){
 
 			if(err)

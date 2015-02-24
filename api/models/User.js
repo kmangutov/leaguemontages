@@ -38,12 +38,12 @@ module.exports = {
 
 		follower: {
 			collection: 'UserFollower',
-			via: 'follower'
+			via: 'following'
 		},
 
 		following: {
 			collection: 'UserFollower',
-			via: 'following'
+			via: 'follower'
 		},
 
 		comments: {
