@@ -50,7 +50,7 @@ angular.module('appControllers').controller("SubmitController",
     $scope.postData.access_token = $window.sessionStorage.token;
 
     //if token is missing, redirect user to login page to create session 
-    console.log("user " + $scope.postData.createdBy + " and token " + $scope.postData.token);
+    console.log("user " + $scope.postData.createdBy + " and token " + $scope.postData.access_token);
 
     $scope.submit = function() {
       //upload file and get url 
@@ -87,7 +87,7 @@ angular.module('appControllers').controller("SubmitController",
           submission.$save().then(function(res){
             console.log(res.id);
             //redirect user to submission view
-            $window.location.href = 'http://localhost:1337/kirill#/submission/' + res.id;
+            $window.location.href = 'http://localhost:1337/#/submission/' + res.id;
           });   
         });
       }

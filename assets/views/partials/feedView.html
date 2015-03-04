@@ -1,6 +1,17 @@
 <div class="container-fluid">
-
-
+    <div class="row">
+        <div class="feedlist list-group">
+            <div class="list-group-item" ng-repeat="submission in submissions">
+                <a class="list-group-item-heading" href="{{submission.link}}">{{ submission.title }}</h4>
+                <a class="list-group-item-text" 
+                    href="/#/user/submission.createdBy.display_name"> 
+                    {{ submission.createdBy.display_name }}
+                </a>
+                <video ng-show="submission.url" ng-src="{{ submission.url }}" controls></video>
+                <!-- badge controls --> 
+            </div>
+        </div>
+    </div>
 
 </div>
 

@@ -1,6 +1,6 @@
 angular.module('appControllers').controller('FeedsViewController', 
-    ['$scope', '$timeout', '$window', 'AuthService', 'UtilService','SubmissionService', 'UserService',
-    function($scope, $timeout, $window, AuthService, UtilService, SubmissionService, UserService){
+    ['$scope', '$timeout', '$window', 'AuthService', 'UtilService','SubmissionService', 'UserService', 'BadgeTypeService', 'BadgeService',
+    function($scope, $timeout, $window, AuthService, UtilService, SubmissionService, UserService, BadgeTypeService,BadgeService){
 
     $scope.logState = AuthService.logState();
 
@@ -15,6 +15,29 @@ angular.module('appControllers').controller('FeedsViewController',
       });
     } 
 
+    //need to resolve before load up
+    BadgeTypeService.query({}, function(badgeService){
+      $scope.badgeTypes = badgeService;
+    });
+    
+    UserService.get({id:$scope.logState.userid}, function(user){
+        $scope.followings = [];
+        angular.forEach(user.following, function(fuser){
+            $scope.followings.push({"createdBy":fuser.following}); //get list of following ids
+        });
+        
+        var q = {"where":{"or":$scope.followings}};
+        
+        SubmissionService.query(q, function(submissions){
+            angular.forEach(submissions, function(submission){
+                submission.badges = BadgeService.getBadges($scope.badgeTypes, submission.badges);
+                //add submision link
+                submission.link = "/#/submission/" + submission.id;
+                submission.ratings = UtilService.getRatings(submission.ratings);
+            });
+            $scope.submissions = submissions;
+        });
+    })
     //get list of followings 
     //submissions from followings
     
