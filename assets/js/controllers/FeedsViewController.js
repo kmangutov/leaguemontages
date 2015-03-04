@@ -8,6 +8,7 @@ angular.module('appControllers').controller('FeedsViewController',
     $scope.warning = {};
     $scope.warning.url = 'http://localhost:1337/#/login';
     $scope.warning.time = 5; //sec
+    $scope.timer = new Date().getMilliseconds();
 
     if(!$scope.logState.isLogged){
       $scope.timeout = UtilService.redirectWithSecond($scope.warning).then(function(){
@@ -33,6 +34,7 @@ angular.module('appControllers').controller('FeedsViewController',
                 submission.badges = BadgeService.getBadges($scope.badgeTypes, submission.badges);
                 //add submision link
                 submission.link = "/#/submission/" + submission.id;
+                submission.url += "?t=" + new Date().getMilliseconds();
                 submission.ratings = UtilService.getRatings(submission.ratings);
             });
             $scope.submissions = submissions;
