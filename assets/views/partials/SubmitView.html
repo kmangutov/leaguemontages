@@ -58,8 +58,6 @@
 </div>
 </form>
 
-<div class="alert alert-warning" ng-show="!isLogged">
-  <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <strong>Warning!</strong> You need to login first to upload a video. Redirect to login page in {{ warning.time }} secs.
-</div>
+<div warning message="You must to login first to upload a video" 
+     redirect="/#/login" time="5" ng-show="!logState.isLogged"></div>
 

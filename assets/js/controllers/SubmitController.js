@@ -1,31 +1,18 @@
 angular.module('appControllers').controller("SubmitController", 
-  ['$scope', '$window','$timeout', '$location', '$upload','UtilService', 'SubmissionTypeService', 'ChampionRoleService', 'ChampionService', 'SubmissionService',
-  function($scope, $window, $timeout, $location, $upload, UtilService, SubmissionTypeService, ChampionRoleService, ChampionService, SubmissionService) {
+  ['$scope', '$window','$timeout', '$location', '$upload','AuthService', 'UtilService', 'SubmissionTypeService', 'ChampionRoleService', 'ChampionService', 'SubmissionService',
+  function($scope, $window, $timeout, $location, $upload, AuthService, UtilService, SubmissionTypeService, ChampionRoleService, ChampionService, SubmissionService) {
 
     $scope.tagline = "submitView";
 
     $scope.file = {};
     $scope.file.data = "";
     $scope.missingField = false;
-    $scope.isLogged = false;
+    $scope.logState = AuthService.logState();
 
     //validation if there is no logged in user
     //notify and redirect to home 
     console.log("token - " + $window.sessionStorage.token);
     console.log(typeof $window.sessionStorage.token);
-    
-    $scope.warning = {};
-    $scope.warning.url = 'http://localhost:1337/kirill#/login';
-    $scope.warning.time = 5; //sec
-
-    if($window.sessionStorage.token === undefined){
-      $scope.timeout = UtilService.redirectWithSecond($scope.warning).then(function(){
-        $timeout.cancel($scope.timeout);
-      });
-    } else {
-      $scope.isLogged = true;
-      console.log("setting logged is true");
-    }
 
     //init form data
     ChampionRoleService.query({}, function(championRoleService) {
