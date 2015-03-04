@@ -3,9 +3,7 @@ angular.module('appDirectives').directive('followSection',
     function(UtilService, AuthService, $timeout){
     return {
         restrict: 'A', //Element Attribute
-        /**
-         * @param: logstate - current log state
-         * @param: followstate - {id:userid, ret:true} like object describing user follow state toward other user 
+        /** 
          * @param: targetuser - a user to be tested for follow state
          * @param: warnings - boolean variable to identify if there is a login user or not
          */

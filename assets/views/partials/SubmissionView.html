@@ -1,14 +1,16 @@
 <div class="banner_left">
 </div>
-    <!-- error messages -->
+    <!-- error messages has to be sticky top -->
     <div class="alert alert-warning" ng-show="!isAccessible">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong>Warning!</strong> You need to login first.
     </div>
+
     <div class="alert alert-warning" ng-show="!isValidSubmission">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong>Warning!</strong> Requested submission does not exist.
     </div>
+
     <!-- display all infomation about a particular submission -->
 
     <div class="container-fluid" ng-show="isValidSubmission">
@@ -55,12 +57,7 @@
                         </span>
                     </div>
                     <!-- display follow button if not owner, this can be reusable, TODO refactor to directive-->
-                    <div id="follower" class="col-sm-2" ng-hide="followState.ret">
-                        <div class="btn btn-default" ng-click="follow()">Follow</div>
-                    </div> 
-                    <div id="follower" class="col-sm-2" ng-show="followState.ret">
-                        <div class="btn btn-default" ng-click="unfollow()">Unfollow</div>
-                    </div>
+                    <div follow-section warnings="isAccessible" targetuser="pageUser.id"></div>
                 </div> <!-- end row -->
                 <br/>
 

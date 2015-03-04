@@ -162,34 +162,7 @@ angular.module('appControllers').controller("SubmissionViewController",
         }
         $scope.editable = "";
     };
-    //-----
-
-    //--- will be removed --//
-    $scope.follow = function(){
-        console.log("follow button was clicked");
-        if(!$scope.handleNonUser())
-            return;
-
-        console.log("processing following");
-
-        UtilService.follow($scope.logState.userid, $scope.userid)
-                .then(function(data){
-                    $scope.followState = data;
-                });
-    };
-
-    $scope.unfollow = function(){
-        console.log("unfollow button was clicked");
-        if(!$scope.handleNonUser())
-            return;
-
-        console.log("processing unfollowing");
-        UtilService.unfollow($scope.followState.id)
-                .then(function(data){
-                    $scope.followState = data;
-                })
-    };
-    /// --- ///
+    
 
     $scope.$on("destroy", function(event){
       $timeout.cancel($scope.timeout);
