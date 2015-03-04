@@ -17,6 +17,7 @@
     <div id="navbar" class="navbar-collapse collapse in" aria-expanded="true">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/#/">Home</a></li>
+        <li><a ng-show="logState.isLogged" href="/#/feeds">Feeds</a></li>
         <li><a href="/#/search">Browse</a></li>
         <li><a ng-show="logState.isLogged" href="/#/submit">Upload</a></li>
         <li><a ng-show="logState.isLogged" href="#" ng-click="logout()">Logout</a></li>

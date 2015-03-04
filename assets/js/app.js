@@ -36,7 +36,7 @@ app.config(['$routeProvider', function($routeProvider) {
 
     .when('/feeds', {
       templateUrl: 'views/partials/feedView.html',
-      controller: 'FeedViewController'
+      controller: 'FeedsViewController'
     })
 
     .when('/user/:display_name', {

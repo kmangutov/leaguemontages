@@ -15,7 +15,7 @@ angular.module('appControllers').controller("SubmitController",
     console.log(typeof $window.sessionStorage.token);
     
     $scope.warning = {};
-    $scope.warning.url = 'http://localhost:1337/kirill#/login';
+    $scope.warning.url = 'http://localhost:1337/#/login';
     $scope.warning.time = 5; //sec
 
     if($window.sessionStorage.token === undefined){
