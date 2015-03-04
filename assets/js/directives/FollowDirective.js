@@ -11,7 +11,8 @@ angular.module('appDirectives').directive('followSection',
          */
         scope: { 
             targetuser: '=',
-            warnings:'=' //TODO: this can be controlled here 
+            warnings:'=', //TODO: this can be controlled here 
+            followstate: '='
         },
         
         controller: function($scope) {
